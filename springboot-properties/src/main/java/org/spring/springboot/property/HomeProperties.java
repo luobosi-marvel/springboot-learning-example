@@ -1,13 +1,11 @@
 package org.spring.springboot.property;
 
-import org.springframework.beans.factory.annotation.Value;
 import org.springframework.boot.context.properties.ConfigurationProperties;
 import org.springframework.stereotype.Component;
 
 /**
  * 家乡属性
  *
- * Created by bysocket on 17/04/2017.
  */
 @Component
 @ConfigurationProperties(prefix = "home")

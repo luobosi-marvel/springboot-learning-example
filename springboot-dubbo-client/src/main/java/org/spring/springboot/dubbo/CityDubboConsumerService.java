@@ -7,11 +7,15 @@ import org.springframework.stereotype.Component;
 /**
  * 城市 Dubbo 服务消费者
  *
- * Created by bysocket on 28/02/2017.
  */
 @Component
 public class CityDubboConsumerService {
 
+    /**
+     * 这里是服务消费者，提供一个接口，
+     * 和服务提供者提供的接口一致，
+     * 使用 Dubbo 的注解注入
+     */
     @Reference(version = "1.0.0")
     CityDubboService cityDubboService;
 

@@ -9,7 +9,6 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
 /**
- * Created by xchunzhao on 02/05/2017.
  */
 @RestController
 public class CityRestController {

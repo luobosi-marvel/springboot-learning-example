@@ -3,7 +3,6 @@ package org.spring.springboot.result;
 /**
  * 返回体
  *
- * Created by bysocket on 14/03/2017.
  */
 public class ResultBody {
     /**

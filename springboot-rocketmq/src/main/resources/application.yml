@@ -1,0 +1,19 @@
+spring:
+    rocketmq:
+            producer:
+               #主消息生产者
+                name: fire_eye
+                topic:  fire_eye
+                producerGroup:  p_fire_eye_ht
+                nameServerAddress:  mq101.2dfire-daily.com:9876;mq102.2dfire-daily.com:9876
+                retryTimesWhenSendFailed:  2
+
+            consumer:
+               #主消息消费者
+                name: fire_eye_order
+                topic:  mqhandler
+                consumerGroup:  c_order_fire_eye
+                nameServerAddress:  mq101.2dfire-daily.com:9876;mq102.2dfire-daily.com:9876
+                consumerHandle:
+                #消息处理器，每个tag对应一个处理器，以"-"分隔
+                     - mqHandler

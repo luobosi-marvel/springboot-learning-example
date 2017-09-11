@@ -52,6 +52,10 @@
 		<module>spring-data-elasticsearch-crud</module>
 		<module>spring-data-elasticsearch-query</module>
 
+
+		<!-- Spring Boot 整合 MQ 篇 -->
+		<module>springboot-rocketmq</module>
+
 	</modules>
 
 </project>

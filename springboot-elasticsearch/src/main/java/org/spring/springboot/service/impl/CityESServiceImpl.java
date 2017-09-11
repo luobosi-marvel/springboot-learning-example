@@ -22,7 +22,6 @@ import java.util.List;
 /**
  * 城市 ES 业务逻辑实现类
  *
- * Created by bysocket on 07/02/2017.
  */
 @Service
 public class CityESServiceImpl implements CityService {

@@ -1,11 +1,9 @@
 package org.spring.springboot.domain;
 
-import java.io.Serializable;
 
 /**
  * 城市实体类
  *
- * Created by bysocket on 07/02/2017.
  */
 public class City {
 
