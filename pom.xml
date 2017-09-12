@@ -56,6 +56,10 @@
 		<!-- Spring Boot 整合 MQ 篇 -->
 		<module>springboot-rocketmq</module>
 
+
+		<!-- Spring Boot 整合 Shiro 篇 -->
+		<module>springboot-shiro</module>
+
 	</modules>
 
 </project>
