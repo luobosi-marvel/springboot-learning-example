@@ -1,0 +1,190 @@
+问：
+    有了springMVC，为什么还要用servlet？有了servlet3的注解，为什么还要使用ServletRegistrationBean注入的方式？
+使用场景：在有些场景下，比如我们要使用hystrix-dashboard，这时候就需要注入HystrixMetricsStreamServlet（第三方
+的servlet），该servlet是hystrix的组件。
+
+------------------------------------------------------------------------------------------------------------
+
+
+Web开发使用 Controller 基本上可以完成大部分需求，但是我们还可能会用到 Servlet、Filter、Listener、Interceptor 等等。
+
+当使用spring-Boot时，嵌入式Servlet容器通过扫描注解的方式注册Servlet、Filter和Servlet规范的所有监听器（如HttpSessionListener监听器）。
+Spring boot 的主 Servlet 为 DispatcherServlet，其默认的url-pattern为“/”。也许我们在应用中还需要定义更多的Servlet，
+该如何使用SpringBoot来完成呢？
+
+在spring boot中添加自己的Servlet有两种方法，代码注册Servlet和注解自动注册（Filter和Listener也是如此）。
+一、代码注册通过ServletRegistrationBean、 FilterRegistrationBean 和 ServletListenerRegistrationBean 获得控制。
+也可以通过实现 ServletContextInitializer 接口直接注册。
+
+二、在 SpringBootApplication 上使用@ServletComponentScan 注解后，Servlet、Filter、Listener 可以直接通过 @WebServlet、
+@WebFilter、@WebListener 注解自动注册，无需其他代码。
+
+通过代码注册Servlet示例代码：
+SpringBootSampleApplication.Java
+
+package org.springboot.sample;
+
+import org.springboot.sample.servlet.MyServlet;
+import org.springframework.boot.SpringApplication;
+import org.springframework.boot.autoconfigure.SpringBootApplication;
+import org.springframework.boot.context.embedded.ServletRegistrationBean;
+import org.springframework.boot.web.servlet.ServletComponentScan;
+import org.springframework.context.annotation.Bean;
+import org.springframework.web.servlet.DispatcherServlet;
+
+@SpringBootApplication
+public class SpringBootSampleApplication {
+
+    /**
+     * 使用代码注册Servlet（不需要@ServletComponentScan注解）
+     *
+     *
+     */
+    @Bean
+    public ServletRegistrationBean servletRegistrationBean() {
+        return new ServletRegistrationBean(new MyServlet(), "/xs/*");// ServletName默认值为首字母小写，即myServlet
+    }
+
+    public static void main(String[] args) {
+        SpringApplication.run(SpringBootSampleApplication.class, args);
+    }
+}
+
+MyServlet.java
+
+package org.springboot.sample.servlet;
+
+import java.io.IOException;
+import java.io.PrintWriter;
+
+import javax.servlet.ServletException;
+import javax.servlet.annotation.WebServlet;
+import javax.servlet.http.HttpServlet;
+import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpServletResponse;
+
+/**
+ * Servlet
+ *
+ *
+ */
+//@WebServlet(urlPatterns="/xs/*", description="Servlet的说明")
+public class MyServlet extends HttpServlet{
+
+    private static final long serialVersionUID = -8685285401859800066L;
+
+    @Override
+    protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
+        System.out.println(">>>>>>>>>>doGet()<<<<<<<<<<<");
+        doPost(req, resp);
+    }
+
+    @Override
+    protected void doPost(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
+        System.out.println(">>>>>>>>>>doPost()<<<<<<<<<<<");
+        resp.setContentType("text/html");
+        PrintWriter out = resp.getWriter();
+        out.println("<html>");
+        out.println("<head>");
+        out.println("<title>Hello World</title>");
+        out.println("</head>");
+        out.println("<body>");
+        out.println("<h1>大家好，我的名字叫Servlet</h1>");
+        out.println("</body>");
+        out.println("</html>");
+    }
+
+}
+使用注解注册Servlet示例代码
+SpringBootSampleApplication.java
+
+package org.springboot.sample;
+
+import org.springboot.sample.servlet.MyServlet;
+import org.springframework.boot.SpringApplication;
+import org.springframework.boot.autoconfigure.SpringBootApplication;
+import org.springframework.boot.context.embedded.ServletRegistrationBean;
+import org.springframework.boot.web.servlet.ServletComponentScan;
+import org.springframework.context.annotation.Bean;
+import org.springframework.web.servlet.DispatcherServlet;
+
+@SpringBootApplication
+@ServletComponentScan
+public class SpringBootSampleApplication {
+
+    public static void main(String[] args) {
+        SpringApplication.run(SpringBootSampleApplication.class, args);
+    }
+}
+
+
+MyServlet2.java
+package org.springboot.sample.servlet;
+
+import java.io.IOException;
+import java.io.PrintWriter;
+
+import javax.servlet.ServletException;
+import javax.servlet.annotation.WebServlet;
+import javax.servlet.http.HttpServlet;
+import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpServletResponse;
+
+/**
+ * Servlet
+ *
+ *
+ */
+@WebServlet(urlPatterns="/xs/myservlet", description="Servlet的说明") // 不指定name的情况下，name默认值为类全路径，
+即 com.spring.springboot.servlet.AnnotationMyServlet
+public class MyServlet2 extends HttpServlet{
+
+    private static final long serialVersionUID = -8685285401859800066L;
+
+    @Override
+    protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
+        System.out.println(">>>>>>>>>>doGet2()<<<<<<<<<<<");
+        doPost(req, resp);
+    }
+
+    @Override
+    protected void doPost(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
+        System.out.println(">>>>>>>>>>doPost2()<<<<<<<<<<<");
+        resp.setContentType("text/html");
+        PrintWriter out = resp.getWriter();
+        out.println("<html>");
+        out.println("<head>");
+        out.println("<title>Hello World</title>");
+        out.println("</head>");
+        out.println("<body>");
+        out.println("<h1>大家好，我的名字叫Servlet2</h1>");
+        out.println("</body>");
+        out.println("</html>");
+    }
+
+}
+使用 @WebServlet 注解，其中可以设置一些属性。
+
+有个问题：DispatcherServlet 默认拦截“/”，MyServlet 拦截“/xs/*”，MyServlet2 拦截“/xs/myservlet”，那么在我们访问
+ http://localhost:8080/xs/myservlet 的时候系统会怎么处理呢？如果访问 http://localhost:8080/xs/abc 的时候又是什么结果呢？
+ 这里就不给大家卖关子了，其结果是“匹配的优先级是从精确到模糊，复合条件的Servlet并不会都执行”
+
+既然系统DispatcherServlet 默认拦截“/”，那么我们是否能做修改呢，答案是肯定的，我们在SpringBootSampleApplication中添加代码：
+
+/**
+     * 修改DispatcherServlet默认配置
+     *
+     * @param dispatcherServlet
+     * @return
+
+     */
+    @Bean
+    public ServletRegistrationBean dispatcherRegistration(DispatcherServlet dispatcherServlet) {
+        ServletRegistrationBean registration = new ServletRegistrationBean(dispatcherServlet);
+        registration.getUrlMappings().clear();
+        registration.addUrlMappings("*.do");
+        registration.addUrlMappings("*.json");
+        return registration;
+    }
+当然，这里可以对DispatcherServlet做很多修改，并非只是UrlMappings。
+所以，根据项目业务场景，还是有必要用到servlet的。

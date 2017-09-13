@@ -60,6 +60,12 @@
 		<!-- Spring Boot 整合 Shiro 篇 -->
 		<module>springboot-shiro</module>
 
+		<!-- Spring Boot 整合 Quartz 篇 -->
+		<module>springboot-quartz</module>
+
+		<!-- Spring Boot 整合 Servlet 篇 -->
+		<module>springboot-servlet</module>
+
 	</modules>
 
 </project>
