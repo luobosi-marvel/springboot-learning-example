@@ -1,0 +1,17 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!-- Bean头部 -->
+<beans xmlns="http://www.springframework.org/schema/beans"
+       xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+       xmlns:dubbo="http://code.alibabatech.com/schema/dubbo"
+       xsi:schemaLocation="
+        http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans-3.0.xsd
+		http://code.alibabatech.com/schema/dubbo http://code.alibabatech.com/schema/dubbo/dubbo.xsd">
+
+<!--    <dubbo:provider delay="-1" loadbalance="leastactive"/>
+    <dubbo:provider filter="datFilter"/>-->
+
+    <!-- 对外提供的服务 -->
+    <dubbo:service  interface="com.spring.springboot.service.MarvelServiceFacade"
+                   ref="marvelServiceImpl"
+                   version="1.0.0"/>
+</beans>

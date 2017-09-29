@@ -1,12 +1,5 @@
 package com.spring.springboot;
 
-import org.apache.shiro.SecurityUtils;
-import org.apache.shiro.authc.AuthenticationException;
-import org.apache.shiro.authc.UsernamePasswordToken;
-import org.apache.shiro.config.IniSecurityManagerFactory;
-import org.apache.shiro.mgt.SecurityManager;
-import org.apache.shiro.subject.Subject;
-import org.junit.Assert;
 import org.junit.Before;
 import org.junit.Test;
 import org.junit.runner.RunWith;
@@ -47,5 +40,4 @@ public class ApplicationTests {
 				.perform(get("/toIndex"));
 				//.andExpect(status().isOk());
 	}
-
 }

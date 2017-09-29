@@ -1,0 +1,10 @@
+spring:
+  thymeleaf:
+    cache: true # 是否开启模板缓存，默认true
+    check-template-location: true # 检查模板位置是否存在
+    content-type: text/html # Content-Type value
+    enabled: true # 是否启用MVC-Thymeleaf视图
+    encoding: utf-8 # 模板编码
+    mode: HTML5 # 要应用于模板的模板模式
+    prefix: classpath:/templates/ # 在链接网址时预先查看名称的前缀
+    suffix: .html # 链接网址时附加到视图名称的后缀

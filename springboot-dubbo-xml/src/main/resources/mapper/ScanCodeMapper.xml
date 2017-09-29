@@ -1,0 +1,53 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.dfire.ads.marvel.dao.mapper.ScanCodeMapper">
+    <resultMap id="BaseResultMap" type="com.dfire.ads.marvel.bo.ScanCode">
+        <id column="scan_code_id" property="scanCodeId" jdbcType="VARCHAR"/>
+        <result column="customer_register_id" property="customerRegisterId" jdbcType="VARCHAR"/>
+        <result column="sale_code" property="saleCode" jdbcType="BIGINT"/>
+        <result column="scan_time" property="scanTime" jdbcType="BIGINT"/>
+        <result column="first_login_time" property="firstLoginTime" jdbcType="BIGINT"/>
+        <result column="create_time" property="createTime" jdbcType="BIGINT"/>
+        <result column="op_time" property="opTime" jdbcType="BIGINT"/>
+        <result column="last_ver" property="lastVer" jdbcType="INTEGER"/>
+        <result column="is_valid" property="isValid" jdbcType="TINYINT"/>
+    </resultMap>
+
+    <sql id="Base_Column_List">
+        scan_code_id, customer_register_id, sale_code, scan_time, first_login_time,
+        create_time, op_time, last_ver, is_valid
+    </sql>
+
+    <!-- 插入一条数据 -->
+    <insert id="insert" parameterType="com.dfire.soa.consumer.fm.bo.ScanCode">
+        INSERT INTO
+        scan_code(scan_code_id, customer_register_id, sale_code, scan_time, first_login_time,
+                  create_time, op_time, last_ver, is_valid)
+        VALUES ( #{scanCodeId,jdbcType=VARCHAR}, #{customerRegisterId,jdbcType=VARCHAR},
+                  #{saleCode,jdbcType=BIGINT}, #{scanTime,jdbcType=BIGINT},
+                  #{firstLoginTime,jdbcType=BIGINT}, #{createTime,jdbcType=BIGINT},
+                  #{opTime,jdbcType=BIGINT}, #{lastVer,jdbcType=INTEGER}, #{isValid,jdbcType=SMALLINT});
+    </insert>
+
+    <!-- 根据 customerRegisterId 查询一条纪录 -->
+    <select id="queryByCustomerRegisterId" parameterType="java.lang.String" resultMap="BaseResultMap">
+        SELECT
+        <include refid="Base_Column_List"/>
+        FROM scan_code
+        WHERE customer_register_id = #{customerRegisterId,jdbcType=VARCHAR}
+        and is_valid = 1
+    </select>
+
+    <update id="update" parameterType="com.dfire.soa.consumer.fm.bo.ScanCode">
+        update scan_code
+        <set>
+            scan_time = #{scanTime,jdbcType=BIGINT},
+            sale_code = #{saleCode,jdbcType=BIGINT},
+            first_login_time = #{firstLoginTime,jdbcType=BIGINT},
+            op_time = #{opTime,jdbcType=BIGINT},
+            last_ver = last_ver + 1,
+        </set>
+        where customer_register_id = #{customerRegisterId,jdbcType=VARCHAR}
+        and is_valid = 1
+    </update>
+</mapper>

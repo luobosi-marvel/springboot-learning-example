@@ -59,12 +59,23 @@
 
 		<!-- Spring Boot 整合 Shiro 篇 -->
 		<module>springboot-shiro</module>
+		<module>springboot-shiro2</module>
 
 		<!-- Spring Boot 整合 Quartz 篇 -->
 		<module>springboot-quartz</module>
 
-		<!-- Spring Boot 整合 Servlet 篇 -->
+		<!-- Spring Boot 整合 Servlet3.0 篇 -->
 		<module>springboot-servlet</module>
+		<module>springboot-filter-listener</module>
+
+		<!-- spring boot文件上传【多文件上传】 -->
+		<module>springboot-fileupload</module>
+
+		<!-- spring boot 整合日志 -->
+		<module>springboot-logback</module>
+
+		<!-- spring boot 整合 swagger2 -->
+		<module>springboot-swagger2</module>
 
 	</modules>
 
