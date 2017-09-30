@@ -9,7 +9,7 @@
 	<packaging>jar</packaging>
 
 	<name>springboot-logback:: 整合logback 日志</name>
-	<description>Demo project for Spring Boot</description>
+	<description>SpringBoot 整合logback 日志</description>
 
 	<parent>
 		<groupId>org.springframework.boot</groupId>

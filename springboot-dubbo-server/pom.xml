@@ -7,13 +7,15 @@
     <artifactId>springboot-dubbo-server</artifactId>
     <version>0.0.1-SNAPSHOT</version>
     <name>springboot-dubbo 服务端:: 整合 Dubbo/ZooKeeper 详解 SOA 案例</name>
-
+    <description>springboot 以注解的形式整合 dubbo </description>
     <!-- Spring Boot 启动父依赖 -->
     <parent>
         <groupId>org.springframework.boot</groupId>
         <artifactId>spring-boot-starter-parent</artifactId>
         <version>1.5.1.RELEASE</version>
     </parent>
+
+
 
     <properties>
         <dubbo-spring-boot>1.0.0</dubbo-spring-boot>

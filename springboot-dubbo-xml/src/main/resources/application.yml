@@ -9,7 +9,7 @@ spring:
         application:
             name: springboot-dubbo-xml
         registry:
-           address: zookeeper://127.0.0.1:2181
+           address: zookeeper://47.94.172.234:2181
         protocol:
             name: dubbo
             port: 20880
