@@ -3,8 +3,10 @@
  */
 package org.spring.springboot.dao;
 
-import com.dfire.soa.consumer.fm.bo.ScanCode;
-import com.dfire.soa.consumer.fm.dao.mapper.ScanCodeMapper;
+
+import org.spring.springboot.dao.mapper.ScanCodeMapper;
+import org.spring.springboot.domain.ScanCode;
+import org.springframework.stereotype.Repository;
 
 import javax.annotation.Resource;
 
@@ -14,6 +16,7 @@ import javax.annotation.Resource;
  * @author 萝卜丝
  * @since 2017-09-19
  */
+@Repository
 public class ScanCodeDAO {
 
     @Resource

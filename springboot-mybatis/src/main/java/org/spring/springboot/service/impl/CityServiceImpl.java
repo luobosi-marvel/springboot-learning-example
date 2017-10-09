@@ -13,7 +13,7 @@ import org.springframework.stereotype.Service;
 @Service
 public class CityServiceImpl implements CityService {
 
-    @Autowired
+    @Autowired(required = false)
     private CityDao cityDao;
 
     public City findCityByName(String cityName) {

@@ -3,12 +3,16 @@
  */
 package org.spring.springboot.domain;
 
+import lombok.Data;
+
 /**
  * RegisterValid
  * 注册校验表
  * @author 萝卜丝
  * @since 2017-09-19
  */
+
+@Data
 public class RegisterValid {
 
     /**
@@ -45,68 +49,4 @@ public class RegisterValid {
      * 2：无效
      */
     private int isValid;
-
-    public String getUserLoginId() {
-        return userLoginId;
-    }
-
-    public void setUserLoginId(String userLoginId) {
-        this.userLoginId = userLoginId;
-    }
-
-    public String getCustomerRegisterId() {
-        return customerRegisterId;
-    }
-
-    public void setCustomerRegisterId(String customerRegisterId) {
-        this.customerRegisterId = customerRegisterId;
-    }
-
-    public long getFirstLoginTime() {
-        return firstLoginTime;
-    }
-
-    public void setFirstLoginTime(long firstLoginTime) {
-        this.firstLoginTime = firstLoginTime;
-    }
-
-    public String getRegisterValidId() {
-        return registerValidId;
-    }
-
-    public void setRegisterValidId(String registerValidId) {
-        this.registerValidId = registerValidId;
-    }
-
-    public long getCreateTime() {
-        return createTime;
-    }
-
-    public void setCreateTime(long createTime) {
-        this.createTime = createTime;
-    }
-
-    public long getOpTime() {
-        return opTime;
-    }
-
-    public void setOpTime(long opTime) {
-        this.opTime = opTime;
-    }
-
-    public long getLastVer() {
-        return lastVer;
-    }
-
-    public void setLastVer(long lastVer) {
-        this.lastVer = lastVer;
-    }
-
-    public int getIsValid() {
-        return isValid;
-    }
-
-    public void setIsValid(int isValid) {
-        this.isValid = isValid;
-    }
 }

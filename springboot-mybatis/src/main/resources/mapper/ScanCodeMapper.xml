@@ -3,32 +3,14 @@
 <mapper namespace="com.spring.springboot.dao.mapper.ScanCodeMapper">
     <resultMap id="BaseResultMap" type="com.spring.springboot.domain.ScanCode">
         <id column="scan_code_id" property="scanCodeId" jdbcType="VARCHAR"/>
-        <result column="customer_register_id" property="customerRegisterId;" jdbcType="VARCHAR"/>
-        <result column="sale_code" property="saleCode" jdbcType="BIGINT"/>
-        <result column="create_time" property="createTime" jdbcType="BIGINT"/>
-        <result column="op_time" property="opTime" jdbcType="BIGINT"/>
-        <result column="last_ver" property="lastVer" jdbcType="INTEGER"/>
-        <result column="is_valid" property="isValid" jdbcType="TINYINT"/>
+        <result column="customer_register_id" property="customerRegisterId" jdbcType="VARCHAR"/>
+
     </resultMap>
 
-    <sql id="Base_Column_List">
-        scan_code_id, customer_register_id, sale_code, create_time, op_time, last_ver, is_valid
-    </sql>
-
     <!-- 插入一条数据 -->
-    <insert id="insert" parameterType="com.dfire.soa.consumer.fm.bo.ScanCode">
+    <insert id="insert" parameterType="com.spring.springboot.domain.ScanCode">
         INSERT INTO
-        scan_code(scan_code_id, customer_register_id, sale_code, create_time, op_time, last_ver, is_valid)
-        VALUES ( #{scanCodeId,jdbcType=VARCHER}, #{customerRegisterId,jdbcType=VARCHER},
-                  #{saleCode,jdbcType=VARCHER}, #{createTime,jdbcType=BIGINT}, #{opTime,jdbcType=BIGINT},
-                  #{lastVer,jdbcType=INTEGER}, #{isValid,jdbcType=SMALLINT});
+        scan_code(scan_code_id, customer_register_id)
+        VALUES ( #{scanCodeId,jdbcType=VARCHAR}, #{customerRegisterId,jdbcType=VARCHAR});
     </insert>
-
-    <!-- 根据 customerRegisterId 查询一条纪录 -->
-    <select id="queryByCustomerRegisterId" parameterType="java.lang.String" resultMap="BaseResultMap">
-        SELECT
-        <include refid="Base_Column_List"/>
-        FROM scan_code
-        WHERE customer_register_id = #{customerRegisterId,jdbcType=VARCHER}
-    </select>
 </mapper>
