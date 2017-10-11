@@ -5,8 +5,11 @@ package org.spring.springboot.dao;
 
 import org.junit.Test;
 import org.spring.springboot.BaseTest;
+import org.spring.springboot.dao.mapper.ScanCodeMapper;
+import org.spring.springboot.domain.ScanCode;
 
 import javax.annotation.Resource;
+import java.util.UUID;
 
 /**
  * ScanCodeDAOTest
@@ -17,10 +20,13 @@ import javax.annotation.Resource;
 public class ScanCodeDAOTest extends BaseTest{
 
     @Resource
-    private ScanCodeDAO scanCodeDAO;
+    private ScanCodeMapper scanCodeMapper;
 
     @Test
     public void testInsert() {
-        System.out.println(scanCodeDAO);
+        ScanCode scanCode = new ScanCode();
+        scanCode.setScanCodeId(UUID.randomUUID().toString());
+        scanCode.setCustomerRegisterId(UUID.randomUUID().toString());
+        scanCodeMapper.insert(scanCode);
     }
 }

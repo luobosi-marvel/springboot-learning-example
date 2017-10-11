@@ -5,6 +5,8 @@ package org.spring.springboot.dao.mapper;
 
 
 import org.spring.springboot.domain.ScanCode;
+import org.springframework.stereotype.Component;
+import org.springframework.stereotype.Repository;
 
 /**
  * ScanCodeMapper
@@ -12,6 +14,7 @@ import org.spring.springboot.domain.ScanCode;
  * @author 萝卜丝
  * @since 2017-09-19
  */
+@Component
 public interface ScanCodeMapper {
 
     /**

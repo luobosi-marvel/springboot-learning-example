@@ -1,7 +1,7 @@
 /*
  * Copyright (C) 2009-2016 Hangzhou 2Dfire Technology Co., Ltd. All rights reserved
  */
-package com.spring.springboot.impl;
+package com.spring.springboot.service.impl;
 
 import com.spring.springboot.service.MarvelServiceFacade;
 import org.springframework.stereotype.Service;
