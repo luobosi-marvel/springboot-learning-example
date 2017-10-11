@@ -36,5 +36,3 @@ nbbuild/
 dist/
 nbdist/
 .nb-gradle/
-
-marvel/
