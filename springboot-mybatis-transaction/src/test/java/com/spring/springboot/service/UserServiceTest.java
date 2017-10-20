@@ -18,11 +18,11 @@ import java.util.UUID;
 public class UserServiceTest {
 
     @Resource
-    private UserService userService;
+    private UserService userServiceImpl;
 
     @Test
     public void insert() {
-        System.out.println(userService);
+        System.out.println(userServiceImpl);
 /*        User user = new User();
         user.setId(1236536L);
         user.setName("marvel");

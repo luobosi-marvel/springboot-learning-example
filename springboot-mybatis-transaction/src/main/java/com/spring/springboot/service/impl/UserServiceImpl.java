@@ -7,6 +7,7 @@ import com.spring.springboot.dao.UserDAO;
 import com.spring.springboot.domain.User;
 import com.spring.springboot.service.UserService;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 
 import javax.annotation.Resource;
 
@@ -32,6 +33,7 @@ public class UserServiceImpl implements UserService {
         return userDAO.findByName(name);
     }
 
+    @Transactional
     @Override
     public int insert(User user) {
         return userDAO.insert(user);

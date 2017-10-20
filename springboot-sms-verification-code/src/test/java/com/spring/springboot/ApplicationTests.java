@@ -40,22 +40,4 @@ public class ApplicationTests {
 				.perform(get("/toIndex"));
 				//.andExpect(status().isOk());
 	}
-
-	@Test
-	public void tests() {
-		System.out.println(tes());
-	}
-
-	private int tes() {
-		int m = 0;
-		try {
-			m += 1;
-			return m;
-		} catch (Exception e) {
-
-		}finally {
-			m += 2;
-		}
-		return m;
-	}
 }

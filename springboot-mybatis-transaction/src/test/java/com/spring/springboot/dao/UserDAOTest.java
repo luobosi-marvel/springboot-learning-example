@@ -5,9 +5,11 @@ package com.spring.springboot.dao;
 
 import com.spring.springboot.BaseTest;
 import com.spring.springboot.domain.User;
+import org.junit.Assert;
 import org.junit.Test;
 
 import javax.annotation.Resource;
+import java.util.Date;
 import java.util.UUID;
 
 /**
@@ -28,12 +30,16 @@ public class UserDAOTest extends BaseTest {
 
     @Test
     public void testInsert() {
-/*        User user = new User();
-        user.setId(1236536L);
-        user.setName("marvel");
-        user.setPassword(UUID.randomUUID().toString());
-        user.setAge(22);
-        userDAO.insert(user);*/
+       //userDAO.insert(new User(1236537L, "single", UUID.randomUUID().toString(), 22, new Date()));
+       //userDAO.insert(new User(1236538L, "jane", UUID.randomUUID().toString(), 22, new Date()));
+       //userDAO.insert(new User(1236539L, "blue", UUID.randomUUID().toString(), 22, new Date()));
+       //userDAO.insert(new User(12365310L, "red", UUID.randomUUID().toString(), 22, new Date()));
+       userDAO.insert(new User(12365311L, "yellow", UUID.randomUUID().toString(), 22, new Date()));
+
     }
 
+    @Test
+    public void test() {
+        Assert.assertNull("该对象为 null", null);
+    }
 }

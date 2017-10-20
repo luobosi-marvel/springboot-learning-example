@@ -3,7 +3,10 @@
  */
 package com.spring.springboot.domain;
 
+import lombok.AllArgsConstructor;
 import lombok.Data;
+
+import java.util.Date;
 
 /**
  * User
@@ -13,6 +16,7 @@ import lombok.Data;
  */
 
 @Data
+@AllArgsConstructor
 public class User {
 
     private Long id;
@@ -22,5 +26,7 @@ public class User {
     private String password;
 
     private Integer age;
+
+    private Date startTime;
 
 }

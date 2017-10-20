@@ -5,6 +5,7 @@ package com.spring.springboot.dao;
 
 import com.spring.springboot.domain.User;
 import org.apache.ibatis.annotations.*;
+import org.springframework.stereotype.Repository;
 
 import java.util.List;
 
@@ -14,6 +15,7 @@ import java.util.List;
  * @author 萝卜丝
  * @since 2017-10-10
  */
+@Repository
 @Mapper
 public interface UserDAO {
 
@@ -29,11 +31,12 @@ public interface UserDAO {
             @Result(property = "name", column = "name"),
             @Result(property = "password", column = "password"),
             @Result(property = "age", column = "age"),
+            @Result(property = "startTime", column = "start_time"),
     })
     User findByName(@Param("name") String name);
 
 
-    @Insert("INSERT account SET id=#{id}, name=#{name}, password=#{password}, age=#{age}")
+    @Insert({"INSERT account SET id=#{id}, name=#{name}, password=#{password}, age=#{age}, start_time=#{startTime}"})
     int insert(User user);
 
     @Delete("DELETE FROM account WHERE id=#{id}")

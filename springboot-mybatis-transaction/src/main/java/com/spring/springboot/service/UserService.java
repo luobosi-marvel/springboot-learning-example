@@ -35,6 +35,6 @@ public interface UserService {
      * @param user 用户实体
      * @return 成功返回1
      */
-    @Transactional(isolation = Isolation.DEFAULT, propagation = Propagation.REQUIRED)
+    @Transactional
     int insert(User user);
 }
