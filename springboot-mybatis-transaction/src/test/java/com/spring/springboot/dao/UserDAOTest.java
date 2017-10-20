@@ -42,4 +42,9 @@ public class UserDAOTest extends BaseTest {
     public void test() {
         Assert.assertNull("该对象为 null", null);
     }
+
+    @Test
+    public void tset1() {
+        System.out.println(System.currentTimeMillis());
+    }
 }
