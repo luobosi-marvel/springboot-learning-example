@@ -1,12 +1,12 @@
-package com.springboot.apollo;
+package com.springboot.disconf;
 
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 
 @SpringBootApplication
-public class SpringbootApolloApplication {
+public class DisconfApplication {
 
 	public static void main(String[] args) {
-		SpringApplication.run(SpringbootApolloApplication.class, args);
+		SpringApplication.run(DisconfApplication.class, args);
 	}
 }
