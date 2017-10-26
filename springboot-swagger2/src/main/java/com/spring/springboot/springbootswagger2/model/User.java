@@ -3,38 +3,23 @@
  */
 package com.spring.springboot.springbootswagger2.model;
 
+import io.swagger.annotations.ApiModel;
+import io.swagger.annotations.ApiModelProperty;
+import lombok.Data;
+
 /**
  * User
  *
  * @author 萝卜丝
  * @since 2017-09-26
  */
+@ApiModel(value = "用户实体类")
+@Data
 public class User {
+    @ApiModelProperty(value = "用户id")
     private Long id;
+    @ApiModelProperty("姓名")
     private String name;
+    @ApiModelProperty("年龄")
     private int age;
-
-    public Long getId() {
-        return id;
-    }
-
-    public void setId(Long id) {
-        this.id = id;
-    }
-
-    public String getName() {
-        return name;
-    }
-
-    public void setName(String name) {
-        this.name = name;
-    }
-
-    public int getAge() {
-        return age;
-    }
-
-    public void setAge(int age) {
-        this.age = age;
-    }
 }

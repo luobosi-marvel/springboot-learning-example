@@ -18,15 +18,16 @@ import java.util.*;
  * @since 2017-09-26
  */
 @RestController
-@RequestMapping(value="/users")     // 通过这里配置使下面的映射都在/users下，可去除
+@RequestMapping(value="/users")
 public class UserController {
     static Map<Long, User> users = Collections.synchronizedMap(new HashMap<Long, User>());
-    @ApiOperation(value="获取用户列表", notes="")
+    @ApiOperation(value="获取用户列表", notes="获取用户列表")
     @RequestMapping(value={""}, method= RequestMethod.GET)
     public List<User> getUserList() {
         List<User> r = new ArrayList<User>(users.values());
         return r;
     }
+
     @ApiOperation(value="创建用户", notes="根据User对象创建用户")
     @ApiImplicitParam(name = "user", value = "用户详细实体user", required = true, dataType = "User")
     @RequestMapping(value="", method=RequestMethod.POST)
@@ -34,6 +35,7 @@ public class UserController {
         users.put(user.getId(), user);
         return "success";
     }
+
     @ApiOperation(value="获取用户详细信息", notes="根据url的id来获取用户详细信息")
     @ApiImplicitParam(name = "id", value = "用户ID", required = true, dataType = "Long")
     @RequestMapping(value="/{id}", method=RequestMethod.GET)
@@ -53,6 +55,7 @@ public class UserController {
         users.put(id, u);
         return "success";
     }
+
     @ApiOperation(value="删除用户", notes="根据url的id来指定删除对象")
     @ApiImplicitParam(name = "id", value = "用户ID", required = true, dataType = "Long")
     @RequestMapping(value="/{id}", method=RequestMethod.DELETE)
