@@ -2,6 +2,7 @@ package org.spring.springboot.dao;
 
 import org.apache.ibatis.annotations.Param;
 import org.spring.springboot.domain.City;
+import org.springframework.stereotype.Repository;
 
 import java.util.List;
 
@@ -9,6 +10,7 @@ import java.util.List;
  * 城市 DAO 接口类
  *
  */
+@Repository
 public interface CityDao {
 
     /**

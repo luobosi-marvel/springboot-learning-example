@@ -3,13 +3,15 @@
  */
 package com.spring.springboot.shiro;
 
-import org.apache.shiro.mgt.SecurityManager;
-import org.apache.shiro.session.mgt.SessionManager;
+import com.spring.springboot.BaseTest;
+import com.spring.springboot.bean.Account;
+import com.spring.springboot.dao.AccountDAO;
+import com.spring.springboot.util.MD5Util;
 import org.junit.Test;
-import org.junit.runner.RunWith;
-import org.springframework.test.context.junit4.SpringRunner;
 
 import javax.annotation.Resource;
+import java.util.UUID;
+
 
 /**
  * ShiroStartTest
@@ -17,13 +19,25 @@ import javax.annotation.Resource;
  * @author 萝卜丝
  * @since 2017-09-18
  */
-@RunWith(SpringRunner.class)
-public class ShiroStartTest {
+public class ShiroStartTest extends BaseTest{
 
     @Resource
-    private SessionManager sessionManager;
+    private AccountDAO accountDAO;
+
     @Test
-    public void testHasRole() {
-        System.out.println(sessionManager);
+    public void testInsert() {
+        Account account = new Account();
+        account.setId(UUID.randomUUID().toString());
+        account.setName("luobosi");
+        account.setPassword(MD5Util.MD5("123456"));
+        account.setAccountState(0);
+
+        accountDAO.insert(account);
     }
+
+    @Test
+    public void testFindByName() {
+        System.out.println(this.accountDAO.findByName("aa"));
+    }
+
 }

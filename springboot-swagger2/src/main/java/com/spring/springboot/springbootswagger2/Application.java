@@ -1,12 +1,12 @@
-package com.spring.springboot;
+package com.spring.springboot.springbootswagger2;
 
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 
 @SpringBootApplication
-public class SpringbootShiro2Application {
+public class Application {
 
 	public static void main(String[] args) {
-		SpringApplication.run(SpringbootShiro2Application.class, args);
+		SpringApplication.run(Application.class, args);
 	}
 }

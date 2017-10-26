@@ -1,12 +1,12 @@
-package com.spring.springboot.springbootswagger2;
+package com.spring.springboot;
 
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 
 @SpringBootApplication
-public class SpringbootSwagger2Application {
+public class Application {
 
 	public static void main(String[] args) {
-		SpringApplication.run(SpringbootSwagger2Application.class, args);
+		SpringApplication.run(Application.class, args);
 	}
 }

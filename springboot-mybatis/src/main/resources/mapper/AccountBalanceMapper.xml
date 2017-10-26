@@ -1,0 +1,113 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="org.spring.springboot.dao.mapper.AccountBalanceMapper" >
+  <resultMap id="BaseResultMap" type="org.spring.springboot.domain.AccountBalanceDO" >
+    <id column="account_balance_id" property="accountBalanceId" jdbcType="VARCHAR" />
+    <result column="account_id" property="accountId" jdbcType="VARCHAR" />
+    <result column="balance" property="balance" jdbcType="BIGINT" />
+    <result column="freeze" property="freeze" jdbcType="BIGINT" />
+    <result column="create_time" property="createTime" jdbcType="BIGINT" />
+    <result column="op_time" property="opTime" jdbcType="BIGINT" />
+    <result column="last_ver" property="lastVer" jdbcType="INTEGER" />
+    <result column="is_valid" property="isValid" jdbcType="TINYINT" />
+  </resultMap>
+  <sql id="Base_Column_List" >
+    account_balance_id, account_id, balance, freeze, create_time, op_time, last_ver,
+    is_valid
+  </sql>
+
+  <!--
+    @描述：根据id 查找用户信息
+  -->
+
+  <select id="findAll" resultMap="BaseResultMap" >
+    select
+    <include refid="Base_Column_List" />
+    from account_balance
+    where is_valid=1
+  </select>
+
+  <insert id="insert" parameterType="org.spring.springboot.domain.AccountBalanceDO" >
+    insert into account_balance
+    <trim prefix="(" suffix=")" suffixOverrides="," >
+      <if test="accountBalanceId != null" >
+        account_balance_id,
+      </if>
+      <if test="accountId != null" >
+        account_id,
+      </if>
+      <if test="balance != null" >
+        balance,
+      </if>
+      <if test="freeze != null" >
+        freeze,
+      </if>
+      <if test="createTime != null" >
+        create_time,
+      </if>
+      <if test="opTime != null" >
+        op_time,
+      </if>
+      <if test="lastVer != null" >
+        last_ver,
+      </if>
+      <if test="isValid != null" >
+        is_valid,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides="," >
+      <if test="accountBalanceId != null" >
+        #{accountBalanceId,jdbcType=VARCHAR},
+      </if>
+      <if test="accountId != null" >
+        #{accountId,jdbcType=VARCHAR},
+      </if>
+      <if test="balance != null" >
+        #{balance,jdbcType=BIGINT},
+      </if>
+      <if test="freeze != null" >
+        #{freeze,jdbcType=BIGINT},
+      </if>
+      <if test="createTime != null" >
+        #{createTime,jdbcType=BIGINT},
+      </if>
+      <if test="opTime != null" >
+        #{opTime,jdbcType=BIGINT},
+      </if>
+      <if test="lastVer != null" >
+        #{lastVer,jdbcType=INTEGER},
+      </if>
+      <if test="isValid != null" >
+        #{isValid,jdbcType=TINYINT},
+      </if>
+    </trim>
+  </insert>
+
+  <!--
+    @描述：动态更新用户纪录
+  -->
+  <update id="update" parameterType="org.spring.springboot.domain.AccountBalanceDO" >
+    update account_balance
+    <set >
+      <if test="accountId != null" >
+        account_id = #{accountId,jdbcType=VARCHAR},
+      </if>
+      <if test="balance != null" >
+        balance = balance + #{balance,jdbcType=BIGINT},
+      </if>
+      <if test="freeze != null" >
+        freeze = #{freeze,jdbcType=BIGINT},
+      </if>
+      <if test="opTime != null" >
+        op_time = #{opTime,jdbcType=BIGINT},
+      </if>
+      <if test="isValid != null" >
+        is_valid = #{isValid,jdbcType=TINYINT},
+      </if>
+        last_ver = last_ver + 1
+    </set>
+    where account_balance_id = #{accountBalanceId,jdbcType=VARCHAR} AND is_valid=1
+  </update>
+
+
+</mapper>

@@ -2,11 +2,13 @@ package org.spring.springboot.dao;
 
 import org.apache.ibatis.annotations.*;
 import org.spring.springboot.domain.City;
+import org.springframework.stereotype.Component;
 
 /**
  * 城市 DAO 接口类
  *
  */
+@Component
 @Mapper // 标志为 Mybatis 的 Mapper
 public interface CityDao {
 

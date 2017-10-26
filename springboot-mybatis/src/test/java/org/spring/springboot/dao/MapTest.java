@@ -3,7 +3,6 @@
  */
 package org.spring.springboot.dao;
 
-import org.junit.Test;
 import org.spring.springboot.BaseTest;
 
 import java.util.*;
@@ -17,7 +16,7 @@ import java.util.*;
 public class MapTest extends BaseTest{
 
 
-    @Test
+    //@Test
     public void test() {
         Map<String, String> hashMap = new HashMap<String, String>();
 
