@@ -16,7 +16,6 @@ import org.springframework.transaction.annotation.Transactional;
  */
 public interface UserService {
 
-    @Transactional(isolation = Isolation.DEFAULT, propagation = Propagation.REQUIRED)
     User login(String name, String password);
 
 
@@ -35,6 +34,5 @@ public interface UserService {
      * @param user 用户实体
      * @return 成功返回1
      */
-    @Transactional
     int insert(User user);
 }
