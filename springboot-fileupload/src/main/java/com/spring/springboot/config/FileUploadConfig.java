@@ -3,6 +3,7 @@
  */
 package com.spring.springboot.config;
 
+import org.apache.tomcat.util.http.fileupload.FileUploadBase;
 import org.springframework.boot.web.servlet.MultipartConfigFactory;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;

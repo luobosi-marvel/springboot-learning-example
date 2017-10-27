@@ -3,6 +3,7 @@
  */
 package com.spring.springboot.contorller;
 
+import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
@@ -27,6 +28,9 @@ import java.util.List;
 @Controller
 public class FileUploadController {
 
+    @Value("${image.type}")
+    private String suffixList;
+
     @GetMapping("/file")
     public String file() {
         return "file";
@@ -41,11 +45,17 @@ public class FileUploadController {
     @ResponseBody
     public String handleFileUpload(@RequestParam("file")MultipartFile file) {
         if (!file.isEmpty()) {
+            String fileName = file.getOriginalFilename();
+
+            if (isNotContains(fileName)) {
+                return "非法格式";
+            }
+
             try {
                 /*
                     这段代码执行完成之后，图片上传到了工程的根路径；
                  */
-                BufferedOutputStream out = new BufferedOutputStream(new FileOutputStream(new File(file.getOriginalFilename())));
+                BufferedOutputStream out = new BufferedOutputStream(new FileOutputStream(new File(fileName)));
                 out.write(file.getBytes());
                 out.flush();
                 out.close();
@@ -55,9 +65,10 @@ public class FileUploadController {
             }
             return "上传成功";
         } else {
-            return "上传失败，文件是空的";
+            return "上传成功";
         }
     }
+
 
 
     @PostMapping("/batch/upload")
@@ -84,6 +95,21 @@ public class FileUploadController {
             }
         }
 
-        return "文件长传成功";
+        return "文件上传成功";
+    }
+
+
+
+    /**
+     * 判断是否为允许的上传文件类型,true表示允许
+     */
+    private boolean isNotContains(String fileName) {
+        // 获取文件后缀
+        String suffix = fileName.substring(fileName.lastIndexOf(".")
+                + 1, fileName.length());
+        if (suffixList.contains(suffix.trim().toLowerCase())) {
+            return false;
+        }
+        return true;
     }
 }

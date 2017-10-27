@@ -8,3 +8,7 @@ spring:
     mode: HTML5 # 要应用于模板的模板模式
     prefix: classpath:/templates/ # 在链接网址时预先查看名称的前缀
     suffix: .html # 链接网址时附加到视图名称的后缀
+
+
+image:
+  type: jpg,gif,png,ico,bmp,jpeg
