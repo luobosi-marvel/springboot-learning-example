@@ -1,5 +1,5 @@
 server:
-  port: 9998
+  port: 9968
 spring:
     datasource:
         name: springboot-shiro2

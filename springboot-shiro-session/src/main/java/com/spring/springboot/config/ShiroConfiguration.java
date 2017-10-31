@@ -1,21 +1,16 @@
 package com.spring.springboot.config;
 
-import com.spring.springboot.dao.RedisSessionDAO;
-import com.spring.springboot.filter.TokenFilter;
 import com.spring.springboot.realm.MyShiroRealm;
-import org.apache.shiro.authc.credential.HashedCredentialsMatcher;
+import com.spring.springboot.session.RedisSessionDAO;
 import org.apache.shiro.mgt.SecurityManager;
 import org.apache.shiro.spring.security.interceptor.AuthorizationAttributeSourceAdvisor;
 import org.apache.shiro.spring.web.ShiroFilterFactoryBean;
 import org.apache.shiro.web.mgt.DefaultWebSecurityManager;
 import org.apache.shiro.web.session.mgt.DefaultWebSessionManager;
-import org.crazycake.shiro.RedisCacheManager;
-import org.crazycake.shiro.RedisManager;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 
-import javax.servlet.Filter;
 import java.util.LinkedHashMap;
 import java.util.Map;
 
@@ -87,11 +82,6 @@ public class ShiroConfiguration {
         return shiroFilter;
     }
 
-
-    public TokenFilter tokenFilter() {
-        return new TokenFilter();
-    }
-
     @Bean
     public SecurityManager securityManager() {
         // 使用这个对象报错：The security manager does not implement the WebSecurityManager interface.
@@ -102,7 +92,7 @@ public class ShiroConfiguration {
         // 自定义缓存实现 使用redis
         //securityManager.setCacheManager(cacheManager());
         // 自定义session管理 使用redis
-        //securityManager.setSessionManager(sessionManager());
+        securityManager.setSessionManager(sessionManager());
         return securityManager;
     }
 
@@ -149,23 +139,23 @@ public class ShiroConfiguration {
      * RedisSessionDAO shiro sessionDao层的实现 通过redis
      * 使用的是shiro-redis开源插件
      */
-/*    @Bean
-    public org.crazycake.shiro.RedisSessionDAO redisSessionDAO() {
-        org.crazycake.shiro.RedisSessionDAO redisSessionDAO = new org.crazycake.shiro.RedisSessionDAO();
-        redisSessionDAO.setRedisManager(redisManager());
+    @Bean
+    public RedisSessionDAO redisSessionDAO() {
+        RedisSessionDAO redisSessionDAO = new RedisSessionDAO();
+        // redisSessionDAO.setRedisManager(redisManager());
         return redisSessionDAO;
-    }*/
+    }
 
     /**
      * Session Manager
      * 使用的是shiro-redis开源插件
      */
-/*    @Bean
+    @Bean
     public DefaultWebSessionManager sessionManager() {
         DefaultWebSessionManager sessionManager = new DefaultWebSessionManager();
         sessionManager.setSessionDAO(redisSessionDAO());
         return sessionManager;
-    }*/
+    }
 
     /**
      * 凭证匹配器

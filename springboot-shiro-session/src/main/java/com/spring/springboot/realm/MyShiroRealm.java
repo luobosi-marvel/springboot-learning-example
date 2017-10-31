@@ -5,13 +5,17 @@ package com.spring.springboot.realm;
 
 import com.spring.springboot.bean.Account;
 import com.spring.springboot.dao.AccountDAO;
+import com.spring.springboot.session.RedisSessionDAO;
 import org.apache.log4j.Logger;
+import org.apache.shiro.SecurityUtils;
 import org.apache.shiro.authc.*;
 import org.apache.shiro.authz.AuthorizationInfo;
 import org.apache.shiro.authz.SimpleAuthorizationInfo;
 import org.apache.shiro.realm.AuthorizingRealm;
 import org.apache.shiro.session.Session;
+import org.apache.shiro.session.mgt.eis.SessionDAO;
 import org.apache.shiro.subject.PrincipalCollection;
+import org.apache.shiro.subject.Subject;
 import org.apache.shiro.util.ByteSource;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.redis.core.RedisTemplate;
@@ -36,8 +40,8 @@ public class MyShiroRealm extends AuthorizingRealm {
     @Resource
     private AccountDAO accountDAO;
 
-    @Autowired
-    RedisTemplate redisTemplate;
+    @Resource
+    private RedisSessionDAO redisSessionDAO;
 
     //用户登录次数计数  redisKey 前缀
     private String SHIRO_LOGIN_COUNT = "shiro_login_count_";
@@ -58,37 +62,23 @@ public class MyShiroRealm extends AuthorizingRealm {
         UsernamePasswordToken token = (UsernamePasswordToken) authcToken;
         String name = token.getUsername();
         String password = String.valueOf(token.getPassword());
-        //访问一次，计数一次
-       /* ValueOperations<String, String> opsForValue = redisTemplate.opsForValue();
-        opsForValue.increment(SHIRO_LOGIN_COUNT + name, 1);
-        //计数大于5时，设置用户被锁定一小时
-        if(Integer.parseInt(opsForValue.get(SHIRO_LOGIN_COUNT+name)) >= 5){
-            opsForValue.set(SHIRO_IS_LOCK + name, "LOCK");
-            redisTemplate.expire(SHIRO_IS_LOCK + name, 1, TimeUnit.HOURS);
-        }
-        if ("LOCK".equals(opsForValue.get(SHIRO_IS_LOCK + name))){
-            throw new DisabledAccountException("由于密码输入错误次数大于5次，帐号已经禁止登录！");
-        }*/
+
 
         // 从数据库获取对应用户名密码的用户
         Account user = accountDAO.findByName(name);
         if (user == null || !user.getName().equals(name) || !user.getPassword().equals(password)) {
             throw new UnknownAccountException("用户名或密码错误！");
-        }
-        if (null == user) {
-            throw new AccountException("帐号或密码不正确！");
-        }else if("1".equals(user.getAccountState())){
-            /**
-             * 如果用户的status为禁用。那么就抛出<code>DisabledAccountException</code>
-             */
+        } else if("1".equals(user.getAccountState())) {
             throw new DisabledAccountException("此帐号已经设置为禁止登录！");
-        }else{
-            //登录成功
-            // sysUserService.updateById(user);
-            //清空登录计数
-            // opsForValue.set(SHIRO_LOGIN_COUNT + name, "0");
         }
-        Logger.getLogger(getClass()).info("身份认证成功，登录用户："+name);
+
+        Subject subject = SecurityUtils.getSubject();
+        Session session = subject.getSession();
+        System.out.println(session.getId().toString());
+        session.setAttribute("user", user);
+
+        // this.redisSessionDAO.doCreate(session);
+
         return new SimpleAuthenticationInfo(
                 user, //用户名
                 user.getPassword(), //密码

@@ -28,14 +28,13 @@ public class MyFilter implements Filter {
 
         HttpServletRequest request = (HttpServletRequest) servletRequest;
 
-        // Map<String, String> map = new HashMap<String, String>();
-        Enumeration headerNames = request.getHeaderNames();
+        // TODO: 获取 header 里面的内容
+/*        Enumeration headerNames = request.getHeaderNames();
         while (headerNames.hasMoreElements()) {
             String key = (String) headerNames.nextElement();
             String value = request.getHeader(key);
-
             System.out.println("key ====> " + key + "    value ====> " + value);
-        }
+        }*/
 
 
         String token = servletRequest.getParameter("token");

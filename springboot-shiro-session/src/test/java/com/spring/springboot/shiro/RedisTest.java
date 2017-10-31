@@ -4,10 +4,8 @@
 package com.spring.springboot.shiro;
 
 import com.spring.springboot.BaseTest;
-import com.spring.springboot.dao.RedisSessionDAO;
+import com.spring.springboot.session.RedisSessionDAO;
 import org.apache.shiro.session.Session;
-import org.apache.shiro.session.mgt.SessionManager;
-import org.apache.shiro.web.servlet.ShiroHttpSession;
 import org.junit.Assert;
 import org.junit.Test;
 import org.springframework.data.redis.core.RedisTemplate;
