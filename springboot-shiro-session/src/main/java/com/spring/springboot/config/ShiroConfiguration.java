@@ -1,5 +1,7 @@
 package com.spring.springboot.config;
 
+import com.spring.springboot.dao.RedisSessionDAO;
+import com.spring.springboot.filter.TokenFilter;
 import com.spring.springboot.realm.MyShiroRealm;
 import org.apache.shiro.authc.credential.HashedCredentialsMatcher;
 import org.apache.shiro.mgt.SecurityManager;
@@ -7,9 +9,13 @@ import org.apache.shiro.spring.security.interceptor.AuthorizationAttributeSource
 import org.apache.shiro.spring.web.ShiroFilterFactoryBean;
 import org.apache.shiro.web.mgt.DefaultWebSecurityManager;
 import org.apache.shiro.web.session.mgt.DefaultWebSessionManager;
+import org.crazycake.shiro.RedisCacheManager;
+import org.crazycake.shiro.RedisManager;
+import org.springframework.beans.factory.annotation.Value;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 
+import javax.servlet.Filter;
 import java.util.LinkedHashMap;
 import java.util.Map;
 
@@ -25,6 +31,17 @@ import java.util.Map;
  */
 @Configuration
 public class ShiroConfiguration {
+
+
+    @Value("${spring.redis.host}")
+    private String host;
+
+    @Value("${spring.redis.port}")
+    private int port;
+
+    @Value("${spring.redis.timeout}")
+    private int timeout;
+
 
     /**
      * ShiroFilterFactoryBean 处理拦截资源文件问题。
@@ -46,33 +63,46 @@ public class ShiroConfiguration {
 
         // 必须设置 SecurityManager
         shiroFilter.setSecurityManager(securityManager);
+
+
+
+        //自定义拦截器
+/*        Map<String, Filter> filtersMap = new LinkedHashMap<String, Filter>();
+        filtersMap.put("tokenFilter", tokenFilter());
+        shiroFilter.setFilters(filtersMap);*/
+
         // 拦截器
         Map<String, String> filterchainDefinitionMap = new LinkedHashMap<>();
         // 配置退出过滤器，其中的具体的退出代码 Shiro 已经替我们实现了
-        filterchainDefinitionMap.put("/logout", "logout");
-        // <!-- 过滤链定义，从上向下顺序执行，一般将 /** 放在最下边 --> 这是一个坑
 
-        // 如果不设置默认会自动寻找 Web 工程根目录下的 "/login.jsp" 页面
+        //shiroFilter.setSuccessUrl("/index");
         shiroFilter.setLoginUrl("/login");
-        // 登录成功后要跳转的链接
-        shiroFilter.setSuccessUrl("/index");
-        // 未授权界面 (暂无)
+        filterchainDefinitionMap.put("/logout", "logout");
         shiroFilter.setUnauthorizedUrl("/430");
 
         // <!-- authc：所有 url 都必须认证通过才可以访问；anon：所有url 都可以匿名访问-->
+        filterchainDefinitionMap.put("/index", "anon");
         filterchainDefinitionMap.put("/**", "authc");
         shiroFilter.setFilterChainDefinitionMap(filterchainDefinitionMap);
         return shiroFilter;
     }
 
+
+    public TokenFilter tokenFilter() {
+        return new TokenFilter();
+    }
+
     @Bean
     public SecurityManager securityManager() {
         // 使用这个对象报错：The security manager does not implement the WebSecurityManager interface.
-        // DefaultSecurityManager securityManager = new DefaultSecurityManager();
         DefaultWebSecurityManager securityManager = new DefaultWebSecurityManager();
         //设置realm.
         securityManager.setRealm(myShiroRealm());
 
+        // 自定义缓存实现 使用redis
+        //securityManager.setCacheManager(cacheManager());
+        // 自定义session管理 使用redis
+        //securityManager.setSessionManager(sessionManager());
         return securityManager;
     }
 
@@ -85,9 +115,57 @@ public class ShiroConfiguration {
     public MyShiroRealm myShiroRealm() {
         MyShiroRealm myShiroRealm = new MyShiroRealm();
         // 添加凭证匹配器
-        myShiroRealm.setCredentialsMatcher(hashedCredentialsMatcher());
+        //myShiroRealm.setCredentialsMatcher(hashedCredentialsMatcher());
         return myShiroRealm;
     }
+
+    /**
+     * 配置shiro redisManager
+     * 使用的是shiro-redis开源插件
+     * @return
+     */
+  /*  public RedisManager redisManager() {
+        RedisManager redisManager = new RedisManager();
+        redisManager.setHost(host);
+        redisManager.setPort(port);
+        redisManager.setExpire(1800);// 配置缓存过期时间
+        redisManager.setTimeout(timeout);
+        // redisManager.setPassword(password);
+        return redisManager;
+    }*/
+
+    /**
+     * cacheManager 缓存 redis实现
+     * 使用的是shiro-redis开源插件
+     * @return
+     */
+/*    public RedisCacheManager cacheManager() {
+        RedisCacheManager redisCacheManager = new RedisCacheManager();
+        redisCacheManager.setRedisManager(redisManager());
+        return redisCacheManager;
+    }*/
+
+    /**
+     * RedisSessionDAO shiro sessionDao层的实现 通过redis
+     * 使用的是shiro-redis开源插件
+     */
+/*    @Bean
+    public org.crazycake.shiro.RedisSessionDAO redisSessionDAO() {
+        org.crazycake.shiro.RedisSessionDAO redisSessionDAO = new org.crazycake.shiro.RedisSessionDAO();
+        redisSessionDAO.setRedisManager(redisManager());
+        return redisSessionDAO;
+    }*/
+
+    /**
+     * Session Manager
+     * 使用的是shiro-redis开源插件
+     */
+/*    @Bean
+    public DefaultWebSessionManager sessionManager() {
+        DefaultWebSessionManager sessionManager = new DefaultWebSessionManager();
+        sessionManager.setSessionDAO(redisSessionDAO());
+        return sessionManager;
+    }*/
 
     /**
      * 凭证匹配器
@@ -95,7 +173,7 @@ public class ShiroConfiguration {
      * 所以我们需要修改下 doGetAuthenticationInfo 中的代码
      * @return 返回凭证匹配器
      */
-    @Bean
+   /* @Bean
     public HashedCredentialsMatcher hashedCredentialsMatcher() {
         HashedCredentialsMatcher credentialsMatcher = new HashedCredentialsMatcher();
         // 散列算法：这里使用 MD5 算法
@@ -103,7 +181,7 @@ public class ShiroConfiguration {
         // 散列的次数，比如散列两次，相当于 md5(md5(""))
         credentialsMatcher.setHashIterations(1);
         return credentialsMatcher;
-    }
+    }*/
 
     /**
      *  开启shiro aop注解支持.

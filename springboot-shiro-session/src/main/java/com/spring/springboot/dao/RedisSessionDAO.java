@@ -57,8 +57,8 @@ public class RedisSessionDAO extends AbstractSessionDAO{
 
     @Override// 加入session
     protected Serializable doCreate(Session session) {
-        System.out.println("===============doCreate================");
         Serializable token = this.generateSessionId(session);
+        System.out.println("===============doCreate================");
         this.assignSessionId(session, token);
 
         redisTemplate.opsForValue().set(session.getId(), session, expireTime, TimeUnit.MILLISECONDS);

@@ -7,6 +7,7 @@
 <body>
 错误信息：<h4 th:text="${msg}"></h4>
 <form action="/login" method="post">
+    <input type="hidden" name="token" value="1234567899"/>
     <p>账号：<input type="text" name="username"/></p>
     <p>密码：<input type="text" name="password"/></p>
     <p><input type="submit" value="登录"/></p>

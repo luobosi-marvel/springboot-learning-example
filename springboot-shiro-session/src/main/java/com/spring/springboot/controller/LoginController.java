@@ -3,18 +3,16 @@
  */
 package com.spring.springboot.controller;
 
+import com.spring.springboot.bean.Account;
 import org.apache.shiro.SecurityUtils;
-import org.apache.shiro.authc.DisabledAccountException;
-import org.apache.shiro.authc.UnknownAccountException;
-import org.apache.shiro.authc.UsernamePasswordToken;
+import org.apache.shiro.authc.*;
 import org.apache.shiro.session.Session;
 import org.apache.shiro.subject.Subject;
 import org.springframework.stereotype.Controller;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.bind.annotation.*;
 
 import javax.servlet.http.HttpServletRequest;
+import java.util.Date;
 import java.util.Map;
 
 /**
@@ -26,6 +24,8 @@ import java.util.Map;
 @Controller
 public class LoginController {
 
+
+
     @GetMapping({"/", "/index"})
     public String index() {
         return "index";
@@ -35,6 +35,8 @@ public class LoginController {
     public String login() {
         return "login";
     }
+
+
 
     @PostMapping("/login")
     public String login(HttpServletRequest request, Map<String, Object> map)throws Exception {
@@ -56,10 +58,28 @@ public class LoginController {
                 System.out.println("else -- >" + exception);
             }
         } else {
-            return "/index";
+            Session session = SecurityUtils.getSubject().getSession();
+
+
+            return "index";
         }
         map.put("msg", msg);
         // 此方法不处理登录成功,由shiro进行处理.
-        return "/login";
+        return "login";
     }
+
+
+    /**
+     * 退出登录
+     * @return 返回登录视图
+     */
+    @GetMapping(value = "/logout")
+    public String logout() {
+        Subject subject = SecurityUtils.getSubject();
+        if (subject.isAuthenticated()) {
+            subject.logout();
+        }
+        return "login";
+    }
+
 }
