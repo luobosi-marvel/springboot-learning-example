@@ -77,6 +77,8 @@
 		<!-- spring boot 整合 swagger2 -->
 		<module>springboot-swagger2</module>
 
+		<module>springboot-httpclient</module>
+
 	</modules>
 
 </project>
