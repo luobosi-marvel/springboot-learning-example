@@ -43,12 +43,12 @@ public class HttpClientUtil2 {
         post.setEntity(reqEntity);
         HttpResponse response = httpClient.execute(post);
         int statusCode = response.getStatusLine().getStatusCode();
-        if (statusCode == HttpStatus.SC_OK) {
+/*        if (statusCode == HttpStatus.SC_OK) {
             HttpEntity resEntity = response.getEntity();
             String result = EntityUtils.toString(resEntity);
             ResultRrlVO o = JSON.parseObject(result, ResultRrlVO.class);
             return Contants.Url.IMAGETDOWNURLPREFIX + o.getData();
-        }
+        }*/
         return "";
     }
 
@@ -65,7 +65,6 @@ public class HttpClientUtil2 {
         String path = Contants.Url.PATH;
         String projectName = Contants.Url.PROJECTNAME;
         File file = new File("D://temp//f3ed3709f26d7ffbebe3a46315fd41f3.jpg");
-        String httpClientDownUrl = Contants.Url.IMAGETDOWNURLPREFIX;
         String result = saveToOss(file, remoteUrl, projectName, path);
         System.out.println(result);
     }

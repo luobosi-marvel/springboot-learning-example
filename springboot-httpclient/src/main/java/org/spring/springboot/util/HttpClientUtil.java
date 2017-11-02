@@ -69,28 +69,4 @@ public class HttpClientUtil {
         return "";
     }
 
-
-    public static String saveToOss(File fileimg) throws IOException {
-        CloseableHttpClient httpClient = HttpClients.createDefault();
-        HttpPost post = new HttpPost(Contants.Url.REMOTEURL);
-        StringBody path = new StringBody(Contants.Url.PATH);
-        StringBody projectName = new StringBody(Contants.Url.PROJECTNAME);
-        //文件参数
-        FileBody file = new FileBody(fileimg);
-        MultipartEntity reqEntity = new MultipartEntity();
-        reqEntity.addPart("file", file);
-        reqEntity.addPart("path", path);
-        reqEntity.addPart("projectName", projectName);
-        post.setEntity(reqEntity);
-        HttpResponse response = httpClient.execute(post);
-        int statusCode = response.getStatusLine().getStatusCode();
-        if (statusCode == HttpStatus.SC_OK) {
-            HttpEntity resEntity = response.getEntity();
-            String result = EntityUtils.toString(resEntity);
-            ResultRrlVO o = JSON.parseObject(result, ResultRrlVO.class);
-            return Contants.Url.IMAGETDOWNURLPREFIX + o.getData();
-        }
-        return "";
-    }
-
 }

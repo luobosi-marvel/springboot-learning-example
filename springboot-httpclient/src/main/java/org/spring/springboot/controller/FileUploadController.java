@@ -47,7 +47,7 @@ public class FileUploadController {
             InputStream inputStream = file.getInputStream();
 
 
-            return HttpClientUtil.saveToOss(FileUtil.transferToFile(file));
+            return HttpClientUtil.saveToOss(FileUtil.transferToFile(file), "marvel");
         }
             return null;
     }
