@@ -3,12 +3,10 @@
  */
 package com.spring.springboot.contorller;
 
+import org.apache.tomcat.util.http.fileupload.servlet.ServletFileUpload;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Controller;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestParam;
-import org.springframework.web.bind.annotation.ResponseBody;
+import org.springframework.web.bind.annotation.*;
 import org.springframework.web.multipart.MultipartFile;
 import org.springframework.web.multipart.MultipartHttpServletRequest;
 
@@ -43,7 +41,9 @@ public class FileUploadController {
 
     @PostMapping("/upload")
     @ResponseBody
-    public String handleFileUpload(@RequestParam("file")MultipartFile file) {
+    public String handleFileUpload(@RequestBody MultipartFile file,
+                                   @RequestParam("name") String name,
+                                   @RequestParam("file_size") Integer fileSize) {
         if (!file.isEmpty()) {
             String fileName = file.getOriginalFilename();
 
@@ -74,6 +74,7 @@ public class FileUploadController {
     @PostMapping("/batch/upload")
     @ResponseBody
     public String handleFileUpload(HttpServletRequest request) {
+        boolean isMutipart = ServletFileUpload.isMultipartContent(request);
         List<MultipartFile> files = ((MultipartHttpServletRequest) request).getFiles("file");
         MultipartFile file = null;
         BufferedOutputStream stream = null;

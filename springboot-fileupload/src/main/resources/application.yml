@@ -12,3 +12,5 @@ spring:
 
 image:
   type: jpg,gif,png,ico,bmp,jpeg
+server:
+  port: 8080
