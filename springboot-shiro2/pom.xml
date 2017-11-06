@@ -51,6 +51,7 @@
             <version>${shiro-version}</version>
         </dependency>
 
+
         <!-- 使用Mybatis-->
         <dependency>
             <groupId>org.mybatis.spring.boot</groupId>
