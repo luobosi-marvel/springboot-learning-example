@@ -22,16 +22,21 @@ public class TimestampConverter implements GenericConverter {
 
     /**
      * long/Long -> DateTimestamp
-     *
+     * 添加要转换的类型，如果还需要将 Double 类型转换 Long 类型也需要在下面添加
      * @return set
      */
     @Override
     public Set<ConvertiblePair> getConvertibleTypes() {
         Set<ConvertiblePair> pairs = new HashSet<>();
+        // 使 Long 类型可以转成 DateTimestamp 的类型
         pairs.add(new ConvertiblePair(Long.class, DateTimestamp.class));
+        // 使 long 类型可以转成 DateTimestamp 的类型
         pairs.add(new ConvertiblePair(long.class, DateTimestamp.class));
+        // 使 String 类型可以转成 DateTimestamp 的类型
         pairs.add(new ConvertiblePair(String.class, DateTimestamp.class));
+        // 使 Integer 类型可以转成 DateTimestamp 的类型
         pairs.add(new ConvertiblePair(Integer.class, DateTimestamp.class));
+        // 使 int 类型可以转成 DateTimestamp 的类型
         pairs.add(new ConvertiblePair(int.class, DateTimestamp.class));
         return pairs;
     }
@@ -52,4 +57,5 @@ public class TimestampConverter implements GenericConverter {
         Long formatted = DateUtil.getTimeStemp(DateUtil.formatYMD(new Date(timestamp)));
         return new DateTimestamp(formatted);
     }
+
 }

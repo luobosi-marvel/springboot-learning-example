@@ -3,6 +3,7 @@
  */
 package org.spring.springboot.config;
 
+import org.spring.springboot.converter.AmountConverter;
 import org.spring.springboot.converter.TimestampConverter;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Bean;
@@ -19,6 +20,7 @@ import java.util.Set;
 
 /**
  * CustomTypeConverterConfig
+ * 添加我们自定义的转换器到 spring 中
  *
  * @author 萝卜丝
  * @since 2017-11-06
@@ -33,7 +35,9 @@ public class CustomTypeConverterConfig {
         ConfigurableWebBindingInitializer initializer = (ConfigurableWebBindingInitializer)handlerAdapter.getWebBindingInitializer();
         if (initializer.getConversionService() != null) {
             GenericConversionService genericConversionService = (GenericConversionService)initializer.getConversionService();
+            // 在这里我们需要添加我们自定义的转换器
             genericConversionService.addConverter(new TimestampConverter());
+            genericConversionService.addConverter(new AmountConverter());
         }
     }
 
