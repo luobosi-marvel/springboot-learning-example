@@ -16,8 +16,8 @@ import org.springframework.web.bind.annotation.RestController;
  */
 @RestController
 public class AmountController {
-    @RequestMapping(value = "get/amount/{amount}")
-    public Amount returnAmount(@PathVariable(value = "amount") Amount amount) {
+    @RequestMapping(value = "get/amount/{withdraw_sum}")
+    public Amount returnAmount(@PathVariable(value = "withdraw_sum") Amount amount) {
         return amount;
     }
 }
