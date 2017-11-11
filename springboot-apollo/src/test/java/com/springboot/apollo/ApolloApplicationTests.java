@@ -1,4 +1,4 @@
-package com.springboot.cors;
+package com.springboot.apollo;
 
 import org.junit.Test;
 import org.junit.runner.RunWith;

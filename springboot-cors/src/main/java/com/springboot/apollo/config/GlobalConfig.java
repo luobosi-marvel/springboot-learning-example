@@ -1,7 +1,7 @@
 /*
  * Copyright (C) 2009-2016 Hangzhou 2Dfire Technology Co., Ltd. All rights reserved
  */
-package com.springboot.cors.config;
+package com.springboot.apollo.config;
 
 import com.thetransactioncompany.cors.CORSFilter;
 import org.springframework.boot.web.servlet.FilterRegistrationBean;

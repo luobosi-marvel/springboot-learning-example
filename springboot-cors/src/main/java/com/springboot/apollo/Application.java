@@ -1,4 +1,4 @@
-package com.springboot.cors;
+package com.springboot.apollo;
 
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
