@@ -76,8 +76,10 @@
 
 		<!-- spring boot 整合 swagger2 -->
 		<module>springboot-swagger2</module>
-
+		<!-- springboot 整合 httpclient -->
 		<module>springboot-httpclient</module>
+		<!-- springboot 配置跨域处理 -->
+		<module>springboot-cors</module>
 
 	</modules>
 
