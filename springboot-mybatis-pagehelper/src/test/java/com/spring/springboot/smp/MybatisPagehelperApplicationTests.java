@@ -7,7 +7,7 @@ import org.springframework.test.context.junit4.SpringRunner;
 
 @RunWith(SpringRunner.class)
 @SpringBootTest
-public class SpringbootMybatisPagehelperApplicationTests {
+public class MybatisPagehelperApplicationTests {
 
 	@Test
 	public void contextLoads() {

@@ -1,0 +1,12 @@
+spring:
+    datasource:
+        name: custom_paging
+        driverClassName: com.mysql.jdbc.Driver
+        url: jdbc:mysql://127.0.0.1:3306/springboot?useUnicode=true&amp;characterEncoding=utf-8&amp
+        username: root
+        password: root
+
+# 这里是 Mybatis 配置内容
+mybatis:
+    mapper-locations: "classpath*:/mapper/*Mapper.xml"
+    typeAliasesPackage: com.spring.springboot.smp.domain
