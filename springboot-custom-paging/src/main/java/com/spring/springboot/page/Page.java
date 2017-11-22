@@ -3,7 +3,6 @@
  */
 package com.spring.springboot.page;
 
-import lombok.Data;
 import lombok.Getter;
 import lombok.Setter;
 import lombok.ToString;
@@ -88,6 +87,83 @@ public class Page implements Serializable {
         }
     }
 
+
+    public Long getEndIndex() {
+        this.endIndex = (currentPage) * everyPage;
+        return endIndex;
+    }
+
+    /**
+     * 判断是否有下一页
+     *
+     * @return true/false
+     */
+    public Boolean getHasNextPage() {
+        return (this.currentPage.equals(this.totalPage)) && (totalPage != 0);
+    }
+
+    /**
+     * 设置总页数的值
+     *
+     * @param totalPage 总页数
+     */
+    public void setTotalPage(Long totalPage) {
+        if(this.currentPage > totalPage){
+            this.currentPage = totalPage;
+        }
+        this.totalPage = totalPage;
+    }
+    /**
+     * 计算总页数
+     * */
+    private Long getTotalPage(Long totalRecords) {
+        Long totalPage = 0L;
+        everyPage = everyPage == null ? 10L : everyPage;
+        if (totalRecords % everyPage == 0) {
+            totalPage = totalRecords / everyPage;
+        } else {
+            totalPage = totalRecords / everyPage + 1;
+        }
+        return totalPage;
+    }
+
+    /**
+     * 获取起始页
+     *
+     * @return 返回起始页
+     */
+    public Long getBeginIndex() {
+        this.beginIndex = (currentPage - 1) * everyPage;
+        return this.beginIndex;
+    }
+
+    /**
+     * 获取当前页
+     *
+     * @return 当前页
+     */
+    public Long getCurrentPage() {
+        this.currentPage = currentPage == 0 ? 1 : currentPage;
+        return this.currentPage;
+    }
+
+    /**
+     * 设置当前页
+     *
+     * @param currentPage 当前页
+     */
+    public void setCurrentPage(Long currentPage) {
+        if(0 == currentPage){
+            currentPage = 1L;
+        }
+        this.currentPage = currentPage;
+    }
+
+    public Long getEveryPage() {
+        this.everyPage = everyPage == 0 ? 30 : everyPage;
+        return this.everyPage;
+    }
+
     /**
      * 首页
      */
@@ -150,54 +226,4 @@ public class Page implements Serializable {
         sortName = newPageSortName.toLowerCase();
     }
 
-    public Long getEndIndex() {
-        this.endIndex = (currentPage) * everyPage;
-        return endIndex;
-    }
-
-    public Boolean getHasNextPage() {
-        return (this.currentPage.equals(this.totalPage)) && (totalPage != 0);
-    }
-
-    /**
-     * 设置总页数的值
-     *
-     * @param totalPage 总页数
-     */
-    public void setTotalPage(Long totalPage) {
-        if(this.currentPage > totalPage){
-            this.currentPage = totalPage;
-        }
-        this.totalPage = totalPage;
-    }
-    /**
-     * 计算总页数
-     * */
-    private Long getTotalPage(Long totalRecords) {
-        Long totalPage = 0L;
-        everyPage = everyPage == null ? 10L : everyPage;
-        if (totalRecords % everyPage == 0) {
-            totalPage = totalRecords / everyPage;
-        } else {
-            totalPage = totalRecords / everyPage + 1;
-        }
-        return totalPage;
-    }
-
-    /**
-     * 获取当前页
-     *
-     * @return 当前页
-     */
-    public Long getCurrentPage() {
-        this.currentPage = currentPage == 0 ? 1 : currentPage;
-        return this.currentPage;
-    }
-
-    public void setCurrentPage(Long currentPage) {
-        if(0 == currentPage){
-            currentPage = 1L;
-        }
-        this.currentPage = currentPage;
-    }
 }
