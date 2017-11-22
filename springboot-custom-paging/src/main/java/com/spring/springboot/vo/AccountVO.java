@@ -6,6 +6,8 @@ package com.spring.springboot.vo;
 import lombok.Data;
 import lombok.ToString;
 
+import java.io.Serializable;
+
 /**
  * AccountVO
  *
@@ -14,6 +16,18 @@ import lombok.ToString;
  */
 @Data
 @ToString
-public class AccountVO {
-
+public class AccountVO implements Serializable{
+    private static final long serialVersionUID = 9027994997311418116L;
+    /** 用户id */
+    private String accountId;
+    /** 手机号 */
+    private String mobile;
+    /** 用户名 */
+    private String username;
+    /** 真实姓名 */
+    private String realName;
+    /** 邮箱 */
+    private String mailbox;
+    /** 用户状态 */
+    private String accountStatus;
 }

@@ -6,6 +6,8 @@ package com.spring.springboot.dto;
 import lombok.Data;
 import lombok.ToString;
 
+import java.io.Serializable;
+
 /**
  * AccountDTO
  *
@@ -14,6 +16,6 @@ import lombok.ToString;
  */
 @Data
 @ToString
-public class AccountDTO {
-
+public class AccountDTO implements Serializable{
+    private static final long serialVersionUID = 2216270567370269523L;
 }
