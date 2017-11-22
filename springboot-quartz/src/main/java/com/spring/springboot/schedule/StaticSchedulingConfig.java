@@ -17,13 +17,16 @@ import org.springframework.scheduling.annotation.Scheduled;
 @EnableScheduling
 public class StaticSchedulingConfig {
 
-    public static final String CRON = "0/5 * * 1 * ?"; // 每月1号，每隔5s 钟执行一次
+    /**
+     * 每月1号，每隔5s 钟执行一次
+     */
+    public static final String CRON = "0/5 * * 1 * ?";
     /**
      * @Scheduled 定义某个定时任务。
+     * @Scheduled(fixedRate = 5000) 每 5s 执行一次
+     * @Scheduled(fixedDelay = 1)
      */
     @Scheduled(cron = CRON) //  CRON 只能是常量
-    // @Scheduled(fixedRate = 5000) 每 5s 执行一次
-    //@Scheduled(fixedDelay = 1)
     public void scheduler() {
         System.out.println(">>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>luobosi");
     }
