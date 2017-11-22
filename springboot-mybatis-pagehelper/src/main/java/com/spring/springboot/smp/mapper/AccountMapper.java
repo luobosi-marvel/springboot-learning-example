@@ -3,6 +3,8 @@
  */
 package com.spring.springboot.smp.mapper;
 
+import com.spring.springboot.smp.domain.AccountDO;
+
 /**
  * AccountMapper
  *
@@ -10,4 +12,10 @@ package com.spring.springboot.smp.mapper;
  * @since 2017-11-22
  */
 public interface AccountMapper {
+
+    int insert(AccountDO accountDO);
+
+    int update(AccountDO accountDO);
+
+    int delete(String accountId);
 }
