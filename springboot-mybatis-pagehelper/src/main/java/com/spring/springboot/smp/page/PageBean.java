@@ -20,7 +20,7 @@ public class PageBean<T> {
     /** 每页显示的总条数 */
     private Integer pageSize = 10;
     /** 总条数 */
-    private Integer totalNum;
+    private Long totalNum;
     /** 是否有下一页 */
     private Integer isNext;
     /** 总页数 */
@@ -42,7 +42,7 @@ public class PageBean<T> {
      * @param pageSize    每页显示的总条数
      * @param totalNum    总条数
      */
-    public PageBean(Integer currentPage, Integer pageSize, Integer totalNum) {
+    public PageBean(Integer currentPage, Integer pageSize, Long totalNum) {
         this.currentPage = currentPage;
         this.pageSize = pageSize;
         this.totalNum = totalNum;
