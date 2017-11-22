@@ -39,6 +39,7 @@ public class Page implements Serializable {
     @Setter
     private Long endIndex;
     /** 总共多少条纪录 */
+    @Getter
     private Long totalCount;
     /** 排序列名 */
     @Getter
@@ -113,6 +114,17 @@ public class Page implements Serializable {
         }
         this.totalPage = totalPage;
     }
+
+    /**
+     * 设置总共有多少纪录
+     *
+     * @param totalCount 总记录数
+     */
+    public void setTotalCount(Long totalCount) {
+        setTotalPage(getTotalPage(totalCount));
+        this.totalCount = totalCount;
+    }
+
     /**
      * 计算总页数
      * */

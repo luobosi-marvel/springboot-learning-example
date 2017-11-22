@@ -11,4 +11,16 @@ package com.spring.springboot.constant;
  */
 public class Constants {
 
+    /**
+     * 和分页相关的一些常量
+     */
+    public interface PageConstants {
+        /** 当前是第几页，前端传入的参数 */
+        String CURRENT_PAGE = "current";
+        /** 页面状态，前端传入的参数 */
+        String PAGE_ACTION = "pageAction";
+        /** 将要获取第几页的数据，前端传入的参数 */
+        String PAGE_KEY = "pageKey";
+    }
+
 }
