@@ -5,18 +5,13 @@ import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 import org.springframework.context.annotation.ImportResource;
 
-/**
- * Application  应用启动类
- *
- * @author luobosi@2dfire.com
- * @since 2017-11-22
- */
 @SpringBootApplication
+@ImportResource({"classpath:config/*.xml"})
 @MapperScan("com.spring.springboot")
-@ImportResource("classpath:mapper/*.xml")
 public class Application {
 
 	public static void main(String[] args) {
 		SpringApplication.run(Application.class, args);
 	}
+
 }

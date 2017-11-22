@@ -11,7 +11,7 @@
     <dubbo:provider filter="datFilter"/>-->
 
     <!-- 对外提供的服务 -->
-    <dubbo:service  interface="com.spring.springboot.scp.service.MarvelServiceFacade"
+    <dubbo:service  interface="com.spring.springboot.service.MarvelServiceFacade"
                    ref="marvelServiceImpl"
                    version="1.0.0"/>
 </beans>

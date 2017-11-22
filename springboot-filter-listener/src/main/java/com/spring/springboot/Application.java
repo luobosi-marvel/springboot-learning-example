@@ -1,22 +1,20 @@
 package com.spring.springboot;
 
-import org.mybatis.spring.annotation.MapperScan;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
-import org.springframework.context.annotation.ImportResource;
+import org.springframework.boot.web.servlet.ServletComponentScan;
 
 /**
- * Application  应用启动类
- *
- * @author luobosi@2dfire.com
- * @since 2017-11-22
+ * 在 SpringBootApplication 上使用@ServletComponentScan 注解后，Servlet、Filter、Listener 可以直接通
+ * 过 @WebServlet、@WebFilter、@WebListener 注解自动注册，无需其他代码。
  */
 @SpringBootApplication
-@MapperScan("com.spring.springboot")
-@ImportResource("classpath:mapper/*.xml")
+@ServletComponentScan
 public class Application {
+
 
 	public static void main(String[] args) {
 		SpringApplication.run(Application.class, args);
 	}
+
 }

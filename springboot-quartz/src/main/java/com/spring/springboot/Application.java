@@ -1,19 +1,14 @@
 package com.spring.springboot;
 
-import org.mybatis.spring.annotation.MapperScan;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
-import org.springframework.context.annotation.ImportResource;
+import org.springframework.scheduling.annotation.EnableScheduling;
 
 /**
- * Application  应用启动类
- *
- * @author luobosi@2dfire.com
- * @since 2017-11-22
+ * TODO: @EnableScheduling 启动定时任务
  */
 @SpringBootApplication
-@MapperScan("com.spring.springboot")
-@ImportResource("classpath:mapper/*.xml")
+@EnableScheduling
 public class Application {
 
 	public static void main(String[] args) {
