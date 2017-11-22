@@ -1,0 +1,22 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.spring.springboot.mapper.AccountMapper" >
+    <resultMap id="BaseResultMap" type="com.spring.springboot.domain.AccountDO">
+        <id column="account_id" property="accountId" jdbcType="VARCHAR" />
+        <result column="username" property="username" jdbcType="VARCHAR" />
+        <result column="mobile" property="mobile" jdbcType="VARCHAR" />
+        <result column="password" property="password" jdbcType="VARCHAR" />
+        <result column="account_status" property="accountStatus" jdbcType="TINYINT" />
+        <result column="mailbox" property="mailbox" jdbcType="VARCHAR" />
+        <result column="real_name" property="realName" jdbcType="VARCHAR" />
+        <result column="create_time" property="createTime" jdbcType="BIGINT" />
+        <result column="op_time" property="opTime" jdbcType="BIGINT" />
+        <result column="last_ver" property="lastVer" jdbcType="INTEGER" />
+        <result column="is_valid" property="isValid" jdbcType="TINYINT" />
+    </resultMap>
+    <sql id="Base_Column_List" >
+        account_id, username, mobile, password, initial_password, is_reset, account_status,
+        account_type, mailbox, real_name, create_time, op_time, last_ver, is_valid
+    </sql>
+
+</mapper>
