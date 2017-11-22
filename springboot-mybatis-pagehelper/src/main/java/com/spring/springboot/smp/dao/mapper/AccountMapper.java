@@ -6,6 +6,8 @@ package com.spring.springboot.smp.dao.mapper;
 import com.spring.springboot.smp.domain.AccountDO;
 import org.springframework.stereotype.Component;
 
+import java.util.List;
+
 /**
  * AccountMapper
  *
@@ -38,4 +40,13 @@ public interface AccountMapper {
      * @return  影响的纪录数
      */
     int delete(String accountId);
+
+    /**
+     * 用户分页查询
+     *
+     * @param start    起始
+     * @param end      结束
+     * @return         范围内的数据
+     */
+    List<AccountDO> listRange(int start, int end);
 }

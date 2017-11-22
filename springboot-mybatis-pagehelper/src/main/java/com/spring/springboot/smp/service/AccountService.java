@@ -3,6 +3,10 @@
  */
 package com.spring.springboot.smp.service;
 
+import com.spring.springboot.smp.domain.AccountDO;
+
+import java.util.List;
+
 /**
  * AccountService
  *
@@ -10,4 +14,14 @@ package com.spring.springboot.smp.service;
  * @since 2017-11-22
  */
 public interface AccountService {
+
+    /**
+     * 分页查找用户信息
+     *
+     * @param currentPage   当前页
+     * @param pageSize      页面总大小
+     * @return              根据分页查找到的结果
+     */
+    List<AccountDO> findAccountByPage(Integer currentPage, Integer pageSize);
+
 }
