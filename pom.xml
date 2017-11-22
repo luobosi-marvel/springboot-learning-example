@@ -80,7 +80,8 @@
 		<module>springboot-httpclient</module>
 		<!-- springboot 配置跨域处理 -->
 		<module>springboot-cors</module>
-
+		<!-- springboot 使用自定义分页 -->
+		<module>springboot-custom-paging</module>
 	</modules>
 
 </project>

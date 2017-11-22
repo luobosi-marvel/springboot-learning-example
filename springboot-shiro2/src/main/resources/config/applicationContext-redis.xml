@@ -1,0 +1,14 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!-- Bean头部 -->
+<beans xmlns="http://www.springframework.org/schema/beans" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+       xsi:schemaLocation="http://www.springframework.org/schema/beans
+        http://www.springframework.org/schema/beans/spring-beans-4.0.xsd ">
+
+
+    <!-- remote cache -->
+    <bean id="remoteCacheService" class="com.dfire.soa.consumer.fa.cache.SentinelCacheService" init-method="init">
+        <property name="sentinels" value="common101.redis.2dfire-daily.com:26379"/>
+        <property name="masterName" value="cluster201"/>
+        <property name="database" value="9"/>
+    </bean>
+</beans>

@@ -4,13 +4,12 @@
 package com.spring.springboot.shiro;
 
 import com.spring.springboot.BaseTest;
-import com.spring.springboot.dao.RedisSessionDAO;
+import com.spring.springboot.bean.AccountInfo;
 import org.apache.shiro.session.Session;
-import org.apache.shiro.session.mgt.SessionManager;
-import org.apache.shiro.web.servlet.ShiroHttpSession;
 import org.junit.Assert;
 import org.junit.Test;
 import org.springframework.data.redis.core.RedisTemplate;
+import org.springframework.data.redis.core.ValueOperations;
 
 import javax.annotation.Resource;
 
@@ -25,11 +24,6 @@ public class RedisTest extends BaseTest{
     @Resource
     private RedisTemplate redisTemplate;
 
-    @Resource
-    private RedisSessionDAO redisSessionDAO;
-
-
-
     @Test
     public void test() {
         System.out.println(redisTemplate);
@@ -37,7 +31,13 @@ public class RedisTest extends BaseTest{
 
     @Test
     public void testRedisSessionDAO() {
-        Session session = this.redisSessionDAO.readSession("k1");
-        Assert.assertNotNull(session);
+        AccountInfo accountInfo = new AccountInfo();
+        accountInfo.setToken("123");
+        accountInfo.setAccountId("1243");
+        accountInfo.setUsername("隔壁老王");
+        ValueOperations<String,Object> valueOperations = redisTemplate.opsForValue();
+        valueOperations.set("hello", accountInfo);
+        System.out.println("useRedisDao = " + valueOperations.get("hello"));
+
     }
 }

@@ -3,6 +3,10 @@
  */
 package com.spring.springboot.controller;
 
+import com.spring.springboot.bean.AccountInfo;
+import org.apache.shiro.SecurityUtils;
+import org.apache.shiro.subject.Subject;
+import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RestController;
 
 /**
@@ -13,4 +17,11 @@ import org.springframework.web.bind.annotation.RestController;
  */
 @RestController
 public class AccountController {
+
+    @GetMapping(value = "get/account")
+    public AccountInfo getAccount() {
+        Subject subject = SecurityUtils.getSubject();
+        AccountInfo user = (AccountInfo) subject.getSession().getAttribute("user");
+        return user;
+    }
 }

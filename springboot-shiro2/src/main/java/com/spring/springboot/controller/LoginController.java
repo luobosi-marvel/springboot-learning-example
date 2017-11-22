@@ -37,12 +37,17 @@ public class LoginController {
     }
 
     @PostMapping("/login")
-    public String login(HttpServletRequest request, Map<String, Object> map)throws Exception {
+    public String login(HttpServletRequest request,
+                        @RequestParam(value = "username") String mobile,
+                        @RequestParam(value = "password") String password) throws Exception {
 
         System.out.println("LoginController.login(post)");
         String exception = (String) request.getAttribute("shiroLoginFailure");
         System.out.println("exception=" + exception);
         String msg = "";
+        UsernamePasswordToken token = new UsernamePasswordToken(mobile, password);
+        Subject subject = SecurityUtils.getSubject();
+
 
         if (exception != null) {
             if (UnknownAccountException.class.getName().equals(exception)) {
@@ -61,7 +66,6 @@ public class LoginController {
         } else {
             return "/index";
         }
-        map.put("msg", msg);
         // 此方法不处理登录成功,由shiro进行处理.
         return "/login";
     }
