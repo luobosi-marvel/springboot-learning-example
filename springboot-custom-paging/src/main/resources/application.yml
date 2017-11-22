@@ -1,0 +1,13 @@
+spring:
+    datasource:
+        name: fire_ads
+        driverClassName: com.mysql.jdbc.Driver
+        url: jdbc:mysql://localhost:3306/fire_ads?useUnicode=true&amp;characterEncoding=utf-8&amp;zeroDateTimeBehavior=convertToNull&amp;autoReconnect=true
+        username: root
+        password: root
+
+
+# 这里是 Mybatis 配置内容
+mybatis:
+    mapper-locations: "classpath*:/mapper/*Mapper.xml"
+    typeAliasesPackage: com.spring.springboot.scp.domain
