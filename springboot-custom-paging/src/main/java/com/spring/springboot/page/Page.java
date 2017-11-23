@@ -9,6 +9,7 @@ import lombok.ToString;
 import org.apache.commons.lang3.StringUtils;
 
 import java.io.Serializable;
+import java.util.List;
 
 /**
  * Page
@@ -17,7 +18,7 @@ import java.io.Serializable;
  * @since 2017-11-22
  */
 @ToString
-public class Page implements Serializable {
+public class Page<T> implements Serializable {
     private static final long serialVersionUID = 4729574245011115009L;
     /** 是否有前一页 */
     @Setter @Getter
@@ -53,7 +54,9 @@ public class Page implements Serializable {
     /** 是否排序 */
     @Setter @Getter
     private Boolean sort = false;
-
+    /** 存储元素 */
+    @Setter @Getter
+    private List<T> item;
     /**
      * 默认的构造方法
      */

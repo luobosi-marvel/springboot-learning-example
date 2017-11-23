@@ -19,4 +19,17 @@
         mailbox, real_name, create_time, op_time, last_ver, is_valid
     </sql>
 
+    <select id="getPageCounts" resultType="java.lang.Long">
+        SELECT COUNT(*) FROM account
+    </select>
+
+
+    <select id="findAccounts" resultMap="BaseResultMap">
+        SELECT <include refid="Base_Column_List"/>
+        FROM account
+        <!--order by ${orderName} ${descAsc} -->
+        <if test="startIndex >=0 and  endIndex >0">
+            limit #{startIndex} , #{endIndex}
+        </if>
+    </select>
 </mapper>

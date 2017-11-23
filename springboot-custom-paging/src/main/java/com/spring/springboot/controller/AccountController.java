@@ -3,8 +3,12 @@
  */
 package com.spring.springboot.controller;
 
+import com.spring.springboot.bean.AccountBean;
 import com.spring.springboot.controller.base.BaseController;
+import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RestController;
+
+import javax.servlet.http.HttpServletRequest;
 
 /**
  * AccountController
@@ -15,4 +19,9 @@ import org.springframework.web.bind.annotation.RestController;
 @RestController
 public class AccountController extends BaseController{
 
+    @GetMapping(value = "/get/account/list")
+    public AccountBean queryAccount(HttpServletRequest request) {
+        return null;
+
+    }
 }
