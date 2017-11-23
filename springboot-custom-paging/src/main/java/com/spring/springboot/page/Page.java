@@ -83,8 +83,8 @@ public class Page implements Serializable {
             case 3 : next();break;
             case 4 : last();break;
             case 5 : sort = true;sort(value);break;
-            case 6 :
-                setCurrentPage(Long.parseLong(value));break;
+            case 6 : setCurrentPage(Long.parseLong(value));break;
+            default:
         }
     }
 

@@ -21,14 +21,14 @@ public class PageUtil {
      * 初始化分页类
      *
      * @param totalCount    总行数
-     * @param index         分页状态
+     * @param pageState     分页状态
      * @param value         只有在设置每页显示多少条时,值不会NULL,其它为NULL
      * @param sessionPage   session 中的分页类
      * @return 返回初始化之后的分页类
      */
-    public static Page inintPage(Long totalCount, Integer index, String value, Page sessionPage) {
+    public static Page inintPage(Long totalCount, Integer pageState, String value, Page sessionPage) {
         Page page = null;
-        if (index < 0) {
+        if (pageState < 0) {
             page = new Page(totalCount);
         } else {
             // 每页显示多少条

@@ -22,7 +22,7 @@ public enum PageState {
     LAST,
     /** 排序 */
     SORT,
-    /** 到第多少页 */
+    /** 去到第多少页 */
     GOPAGE;
 
     /**

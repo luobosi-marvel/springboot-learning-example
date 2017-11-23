@@ -27,14 +27,13 @@ public abstract class BaseController {
      * @return              计算之后的分页对象
      */
     protected Page executePage(HttpServletRequest request, Long totalCount) {
-
+        // 从 request 域中获取当前是第几页
         Long pageNumber = NumberFormatUtil.procRequestLong(request, Constants.PageConstants.CURRENT_PAGE);
 
-        Page page=new Page();
+        Page page = new Page();
         //设置当前页
         page.setCurrentPage(pageNumber);
-        page.setTotalCount(totalCount);
-        //设置总数据行
+        //设置总纪录数
         if (null == totalCount) {
             page.setTotalCount(0L);
         } else {
@@ -46,17 +45,17 @@ public abstract class BaseController {
         String value = request.getParameter(Constants.PageConstants.PAGE_KEY);
 
         // 获取下标判断分页状态
-        int index = PageState.getOrdinal(pageAction);
+        int pageState = PageState.getOrdinal(pageAction);
 
         /**
-         * index < 1 只有二种状态 1 当首次调用时,分页状态类中没有值为 NULL 返回 -1 2 当页面设置每页显示多少条:
-         * index=0,当每页显示多少条时,分页类要重新计算
+         * pageState < 1 只有二种状态 1 当首次调用时,分页状态类中没有值为 NULL 返回 -1 2 当页面设置每页显示多少条:
+         * pageState = 0,当每页显示多少条时,分页类要重新计算
          */
 
-        if (index < 1) {
-            page = PageUtil.inintPage(totalCount, index, value, page);
+        if (pageState < 1) {
+            page = PageUtil.inintPage(totalCount, pageState, value, page);
         } else {
-            page = PageUtil.calculatePage(index, value, page);
+            page = PageUtil.calculatePage(pageState, value, page);
         }
         return page;
     }
