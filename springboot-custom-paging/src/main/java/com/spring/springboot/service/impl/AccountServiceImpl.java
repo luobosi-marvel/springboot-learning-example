@@ -3,8 +3,12 @@
  */
 package com.spring.springboot.service.impl;
 
+import com.spring.springboot.dto.AccountDTO;
 import com.spring.springboot.service.AccountService;
+import com.spring.springboot.vo.AccountVO;
 import org.springframework.stereotype.Service;
+
+import java.util.List;
 
 /**
  * AccountServiceImpl
@@ -14,5 +18,13 @@ import org.springframework.stereotype.Service;
  */
 @Service
 public class AccountServiceImpl implements AccountService {
+    @Override
+    public long getPageCounts() {
+        return 0;
+    }
 
+    @Override
+    public List<AccountVO> findAll(AccountDTO accountDTO) {
+        return null;
+    }
 }
