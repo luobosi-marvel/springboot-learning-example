@@ -12,6 +12,28 @@
 
     <!-- 定义 HttpClient 构建器 -->
     <bean id="httpClientBuilder" class="org.apache.http.impl.client.HttpClientBuilder" factory-method="create">
+        <property name="connectionManager" ref="connectionManager"/>
+    </bean>
 
+    <!-- 定义 httpClient 对象，该 bean 一定是多例的 -->
+    <bean id="httpClient" class="org.apache.http.impl.client.CloseableHttpClient"
+          factory-bean="httpClientBuilder" factory-method="build" scope="prototype">
+    </bean>
+
+    <!-- 定义 requestConfig 构建器 -->
+    <bean id="requestConfigBuilder" class="org.apache.http.client.config.RequestConfig.Builder">
+        <!-- 设置连接的最长时间 -->
+        <property name="connectTimeout" value="${http.connectTimeout}"/>
+        <!-- 从连接池中获取到连接的最长时间 -->
+        <property name="connectionRequestTimeout" value="${http.connectionRequestTimeout}"/>
+        <!-- 数据传输的最长时间 -->
+        <property name="socketTimeout" value="${http.socketTimeout}"/>
+    </bean>
+
+    <!-- 定期清理无效连接 -->
+    <bean class="org.apache.http.impl.client.IdleConnectionEvictor" destroy-method="shutdown">
+        <constructor-arg index="0" ref="connectionManager"/>
+        <constructor-arg index="1" value="${http.maxIdleTime}"/>
+        <constructor-arg index="2" value="MINUTES"/>
     </bean>
 </beans>
