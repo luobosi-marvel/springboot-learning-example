@@ -4,6 +4,7 @@ import com.springboot.luobosi.smt.controller.SimpleController;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.springframework.boot.test.autoconfigure.web.servlet.WebMvcTest;
+import org.springframework.http.MediaType;
 import org.springframework.test.context.junit4.SpringRunner;
 import org.springframework.test.web.servlet.MockMvc;
 import org.springframework.test.web.servlet.MvcResult;
@@ -53,6 +54,24 @@ public class SpringbootMvcTestApplicationTests {
 		assertEquals(expectedResult, content);
 	}
 
+	/**
+	 * 测试 home 方法
+	 *
+	 * @throws Exception 异常
+	 */
+	@Test
+	public void testHome() throws Exception{
+		String name = "marvel";
+		String expectedResult = name + "'s home";
+		String uri = "/home?name=" + name;
 
+		MvcResult mvcResult = mockMvc.perform(MockMvcRequestBuilders.get(uri).accept(MediaType.APPLICATION_JSON))
+				.andReturn();
+		int status = mvcResult.getResponse().getStatus();
+		String content = mvcResult.getResponse().getContentAsString();
+
+		assertEquals(200, status);
+		assertEquals(expectedResult, content);
+	}
 
 }
