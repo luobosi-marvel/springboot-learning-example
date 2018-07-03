@@ -25,4 +25,12 @@ public class HelloWorldController {
         System.out.println(name);
         return info;
     }
+
+    @PostMapping(value = "/request_body1")
+    public UserInfo requestBody1(@RequestBody UserInfo info) {
+        //System.out.println(name);
+        return info;
+    }
+
+
 }
