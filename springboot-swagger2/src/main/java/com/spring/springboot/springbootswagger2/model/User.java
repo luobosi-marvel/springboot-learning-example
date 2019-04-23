@@ -13,13 +13,13 @@ import lombok.Data;
  * @author 萝卜丝
  * @since 2017-09-26
  */
-@ApiModel(value = "用户实体类")
+@ApiModel(value = "用户实体类", description="用户对象user")
 @Data
 public class User {
-    @ApiModelProperty(value = "用户id")
+    @ApiModelProperty(value = "用户id", name = "id")
     private Long id;
-    @ApiModelProperty("姓名")
+    @ApiModelProperty(value = "姓名", name = "username")
     private String name;
-    @ApiModelProperty("年龄")
+    @ApiModelProperty(value = "年龄", name = "age")
     private int age;
 }

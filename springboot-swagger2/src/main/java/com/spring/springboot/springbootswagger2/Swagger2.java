@@ -27,7 +27,7 @@ public class Swagger2 {
         return new Docket(DocumentationType.SWAGGER_2)
                 .apiInfo(apiInfo())
                 .select()
-                .apis(RequestHandlerSelectors.basePackage("https://github.com/luobosi-marvel"))
+                .apis(RequestHandlerSelectors.basePackage("com.spring.springboot.springbootswagger2.controller"))
                 .paths(PathSelectors.any())
                 .build();
     }
